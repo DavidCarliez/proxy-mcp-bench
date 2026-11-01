@@ -1,0 +1,31 @@
+{
+ "total_including_final": 20001,
+ "hosts": {
+  "api.localhost": 7874,
+  "shop.localhost": 9227,
+  "static.localhost": 1483,
+  "auth.localhost": 413,
+  "admin.localhost": 776,
+  "graphql.localhost": 227
+ },
+ "methods": {
+  "GET": 17532,
+  "DELETE": 190,
+  "POST": 1867,
+  "PUT": 411
+ },
+ "flag_in_response": 1,
+ "aws_key_in_response": 2,
+ "reflected_marker_requests": 5,
+ "x_debug_token_requests": 1,
+ "big_responses": 3,
+ "ssrf_param_requests": 25,
+ "admin_cookie_requests": 96,
+ "final_request": "GET http://api.localhost:PORT/api/v1/health?final=1",
+ "T5_admin_403": 554,
+ "T8_500_traceback": 42,
+ "T8_500_npe": 52,
+ "T11_post_orders": 598,
+ "T12_user_email_regex_matches": 5211,
+ "api_401_no_bearer": 255
+}

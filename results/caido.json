@@ -1,0 +1,670 @@
+{
+ "caido-official": {
+  "part1": {
+   "T1": {
+    "calls": 15,
+    "wall": 0.024,
+    "bytes": 1898,
+    "errors": 0,
+    "correct": true,
+    "strategy": "row.id bisection (undocumented trick), then last page"
+   },
+   "T1_naive": {
+    "calls": 201,
+    "wall": 1.2,
+    "bytes": 1997685,
+    "errors": 0,
+    "correct": true,
+    "strategy": "page from the oldest row to the end"
+   },
+   "T2": {
+    "calls": 1,
+    "wall": 0.04,
+    "bytes": 130,
+    "errors": 0,
+    "correct": true,
+    "strategy": "one HTTPQL query"
+   },
+   "T4": {
+    "calls": 1,
+    "wall": 0.025,
+    "bytes": 122,
+    "errors": 0,
+    "correct": true,
+    "strategy": "one HTTPQL query"
+   },
+   "T6": {
+    "calls": 1,
+    "wall": 0.039,
+    "bytes": 618,
+    "errors": 0,
+    "correct": true,
+    "strategy": "one HTTPQL query"
+   },
+   "T7": {
+    "calls": 1,
+    "wall": 0.008,
+    "bytes": 3819,
+    "errors": 0,
+    "correct": true,
+    "strategy": "one HTTPQL query"
+   },
+   "T3": {
+    "calls": 3,
+    "wall": 0.112,
+    "bytes": 349720,
+    "errors": 0,
+    "correct": true,
+    "strategy": "find rows, then pull each ~160 KB body to read the key"
+   },
+   "T5": {
+    "calls": 6,
+    "wall": 0.03,
+    "bytes": 53856,
+    "errors": 0,
+    "correct": true,
+    "strategy": "page every match (limit 100) and count",
+    "value": 554
+   },
+   "T11": {
+    "calls": 6,
+    "wall": 0.032,
+    "bytes": 58163,
+    "errors": 0,
+    "correct": true,
+    "strategy": "page every match (limit 100) and count",
+    "value": 598
+   },
+   "T12": {
+    "calls": 53,
+    "wall": 1.015,
+    "bytes": 522269,
+    "errors": 0,
+    "correct": true,
+    "strategy": "page every match (limit 100) and count",
+    "value": 5211
+   },
+   "T8": {
+    "calls": 2,
+    "wall": 0.008,
+    "bytes": 9003,
+    "errors": 0,
+    "correct": true,
+    "strategy": "page every match (limit 100) and count (x2)"
+   },
+   "T9": {
+    "calls": 1,
+    "wall": 0.002,
+    "bytes": 465,
+    "errors": 0,
+    "correct": true,
+    "strategy": "sitemap roots"
+   },
+   "T10": {
+    "calls": 2,
+    "wall": 0.013,
+    "bytes": 2477,
+    "errors": 0,
+    "correct": true,
+    "strategy": "find row, read a byte window"
+   },
+   "T13": {
+    "calls": 2,
+    "wall": 1.29,
+    "bytes": 1008,
+    "errors": 0,
+    "correct": true,
+    "strategy": "edit_request removeHeaders"
+   },
+   "T14": {
+    "calls": 2,
+    "wall": 0.004,
+    "bytes": 30195,
+    "errors": 0,
+    "correct": false,
+    "strategy": "get_request body (text)"
+   }
+  },
+  "part3": {
+   "tools": 70,
+   "bytes": 82932,
+   "approx_tokens": 20733
+  },
+  "part2_k1": {
+   "S1": {
+    "calls": 15,
+    "wall": 0.029,
+    "bytes": 2264,
+    "errors": 0,
+    "correct": true,
+    "strategy": "row.id bisection (undocumented trick), then last page"
+   },
+   "S1_naive": {
+    "calls": 201,
+    "wall": 1.125,
+    "bytes": 1998051,
+    "errors": 0,
+    "correct": true,
+    "strategy": "page to the end"
+   },
+   "S2": {
+    "calls": 6,
+    "wall": 0.03,
+    "bytes": 53856,
+    "errors": 0,
+    "correct": true,
+    "strategy": "page every match (limit 100) and count",
+    "value": 554
+   },
+   "S3": {
+    "calls": 1,
+    "wall": 0.041,
+    "bytes": 130,
+    "errors": 0,
+    "correct": true,
+    "strategy": "one HTTPQL query"
+   },
+   "S4": {
+    "calls": 1,
+    "wall": 0.002,
+    "bytes": 465,
+    "errors": 0,
+    "correct": true,
+    "strategy": "sitemap roots"
+   }
+  },
+  "part2_k2": {
+   "S1": {
+    "calls": 17,
+    "wall": 0.031,
+    "bytes": 2650,
+    "errors": 0,
+    "correct": true,
+    "strategy": "row.id bisection (undocumented trick), then last page"
+   },
+   "S1_naive": {
+    "calls": 401,
+    "wall": 2.298,
+    "bytes": 4006446,
+    "errors": 0,
+    "correct": true,
+    "strategy": "page to the end"
+   },
+   "S2": {
+    "calls": 12,
+    "wall": 0.07,
+    "bytes": 108083,
+    "errors": 0,
+    "correct": true,
+    "strategy": "page every match (limit 100) and count",
+    "value": 1108
+   },
+   "S3": {
+    "calls": 1,
+    "wall": 0.069,
+    "bytes": 230,
+    "errors": 0,
+    "correct": true,
+    "strategy": "one HTTPQL query"
+   },
+   "S4": {
+    "calls": 1,
+    "wall": 0.002,
+    "bytes": 465,
+    "errors": 0,
+    "correct": true,
+    "strategy": "sitemap roots"
+   }
+  },
+  "part2_k3": {
+   "S1": {
+    "calls": 17,
+    "wall": 0.038,
+    "bytes": 3076,
+    "errors": 0,
+    "correct": true,
+    "strategy": "row.id bisection (undocumented trick), then last page"
+   },
+   "S1_naive": {
+    "calls": 601,
+    "wall": 3.414,
+    "bytes": 6014841,
+    "errors": 0,
+    "correct": true,
+    "strategy": "page to the end"
+   },
+   "S2": {
+    "calls": 17,
+    "wall": 0.115,
+    "bytes": 162221,
+    "errors": 0,
+    "correct": true,
+    "strategy": "page every match (limit 100) and count",
+    "value": 1662
+   },
+   "S3": {
+    "calls": 1,
+    "wall": 0.113,
+    "bytes": 330,
+    "errors": 0,
+    "correct": true,
+    "strategy": "one HTTPQL query"
+   },
+   "S4": {
+    "calls": 1,
+    "wall": 0.002,
+    "bytes": 465,
+    "errors": 0,
+    "correct": true,
+    "strategy": "sitemap roots"
+   }
+  },
+  "part2_k4": {
+   "S1": {
+    "calls": 19,
+    "wall": 0.047,
+    "bytes": 3092,
+    "errors": 0,
+    "correct": true,
+    "strategy": "row.id bisection (undocumented trick), then last page"
+   },
+   "S1_naive": {
+    "calls": 801,
+    "wall": 5.087,
+    "bytes": 8023236,
+    "errors": 0,
+    "correct": true,
+    "strategy": "page to the end"
+   },
+   "S2": {
+    "calls": 23,
+    "wall": 0.187,
+    "bytes": 216448,
+    "errors": 0,
+    "correct": true,
+    "strategy": "page every match (limit 100) and count",
+    "value": 2216
+   },
+   "S3": {
+    "calls": 1,
+    "wall": 0.166,
+    "bytes": 430,
+    "errors": 0,
+    "correct": true,
+    "strategy": "one HTTPQL query"
+   },
+   "S4": {
+    "calls": 1,
+    "wall": 0.002,
+    "bytes": 465,
+    "errors": 0,
+    "correct": true,
+    "strategy": "sitemap roots"
+   }
+  },
+  "part2_k5": {
+   "S1": {
+    "calls": 19,
+    "wall": 0.049,
+    "bytes": 3357,
+    "errors": 0,
+    "correct": true,
+    "strategy": "row.id bisection (undocumented trick), then last page"
+   },
+   "S1_naive": {
+    "calls": 1001,
+    "wall": 6.897,
+    "bytes": 10031649,
+    "errors": 0,
+    "correct": true,
+    "strategy": "page to the end"
+   },
+   "S2": {
+    "calls": 28,
+    "wall": 0.259,
+    "bytes": 270586,
+    "errors": 0,
+    "correct": true,
+    "strategy": "page every match (limit 100) and count",
+    "value": 2770
+   },
+   "S3": {
+    "calls": 1,
+    "wall": 0.203,
+    "bytes": 530,
+    "errors": 0,
+    "correct": true,
+    "strategy": "one HTTPQL query"
+   },
+   "S4": {
+    "calls": 1,
+    "wall": 0.002,
+    "bytes": 465,
+    "errors": 0,
+    "correct": true,
+    "strategy": "sitemap roots"
+   }
+  }
+ },
+ "caido-fork": {
+  "part1": {
+   "T1": {
+    "calls": 1,
+    "wall": 0.003,
+    "bytes": 240,
+    "errors": 0,
+    "correct": true,
+    "strategy": "order:desc limit:1"
+   },
+   "T2": {
+    "calls": 1,
+    "wall": 0.034,
+    "bytes": 145,
+    "errors": 0,
+    "correct": true,
+    "strategy": "one HTTPQL query"
+   },
+   "T4": {
+    "calls": 1,
+    "wall": 0.026,
+    "bytes": 137,
+    "errors": 0,
+    "correct": true,
+    "strategy": "one HTTPQL query"
+   },
+   "T6": {
+    "calls": 1,
+    "wall": 0.035,
+    "bytes": 633,
+    "errors": 0,
+    "correct": true,
+    "strategy": "one HTTPQL query"
+   },
+   "T7": {
+    "calls": 1,
+    "wall": 0.008,
+    "bytes": 3835,
+    "errors": 0,
+    "correct": true,
+    "strategy": "one HTTPQL query"
+   },
+   "T3": {
+    "calls": 1,
+    "wall": 0.095,
+    "bytes": 558,
+    "errors": 0,
+    "correct": true,
+    "strategy": "one query with a regex snippet"
+   },
+   "T5": {
+    "calls": 1,
+    "wall": 0.003,
+    "bytes": 199,
+    "errors": 0,
+    "correct": true,
+    "strategy": "limit:1 + totalCount",
+    "value": 554
+   },
+   "T11": {
+    "calls": 1,
+    "wall": 0.002,
+    "bytes": 195,
+    "errors": 0,
+    "correct": true,
+    "strategy": "limit:1 + totalCount",
+    "value": 598
+   },
+   "T12": {
+    "calls": 1,
+    "wall": 0.016,
+    "bytes": 199,
+    "errors": 0,
+    "correct": true,
+    "strategy": "limit:1 + totalCount",
+    "value": 5211
+   },
+   "T8": {
+    "calls": 2,
+    "wall": 0.006,
+    "bytes": 392,
+    "errors": 0,
+    "correct": true,
+    "strategy": "limit:1 + totalCount (x2)"
+   },
+   "T9": {
+    "calls": 1,
+    "wall": 0.01,
+    "bytes": 623,
+    "errors": 0,
+    "correct": true,
+    "strategy": "sitemap roots"
+   },
+   "T10": {
+    "calls": 2,
+    "wall": 0.015,
+    "bytes": 2492,
+    "errors": 0,
+    "correct": true,
+    "strategy": "find row, read a byte window"
+   },
+   "T13": {
+    "calls": 2,
+    "wall": 1.295,
+    "bytes": 1026,
+    "errors": 0,
+    "correct": true,
+    "strategy": "edit_request removeHeaders"
+   },
+   "T14": {
+    "calls": 2,
+    "wall": 0.005,
+    "bytes": 11026,
+    "errors": 0,
+    "correct": true,
+    "strategy": "get_request body (text)"
+   }
+  },
+  "part3": {
+   "tools": 70,
+   "bytes": 88721,
+   "approx_tokens": 22180
+  },
+  "part2_k1": {
+   "S1": {
+    "calls": 1,
+    "wall": 0.003,
+    "bytes": 236,
+    "errors": 0,
+    "correct": true,
+    "strategy": "order:desc limit:1"
+   },
+   "S2": {
+    "calls": 1,
+    "wall": 0.003,
+    "bytes": 199,
+    "errors": 0,
+    "correct": true,
+    "strategy": "limit:1 + totalCount",
+    "value": 554
+   },
+   "S3": {
+    "calls": 1,
+    "wall": 0.031,
+    "bytes": 145,
+    "errors": 0,
+    "correct": true,
+    "strategy": "one HTTPQL query"
+   },
+   "S4": {
+    "calls": 1,
+    "wall": 0.008,
+    "bytes": 623,
+    "errors": 0,
+    "correct": true,
+    "strategy": "sitemap roots"
+   }
+  },
+  "part2_k2": {
+   "S1": {
+    "calls": 1,
+    "wall": 0.004,
+    "bytes": 240,
+    "errors": 0,
+    "correct": true,
+    "strategy": "order:desc limit:1"
+   },
+   "S2": {
+    "calls": 1,
+    "wall": 0.004,
+    "bytes": 200,
+    "errors": 0,
+    "correct": true,
+    "strategy": "limit:1 + totalCount",
+    "value": 1108
+   },
+   "S3": {
+    "calls": 1,
+    "wall": 0.053,
+    "bytes": 245,
+    "errors": 0,
+    "correct": true,
+    "strategy": "one HTTPQL query"
+   },
+   "S4": {
+    "calls": 1,
+    "wall": 0.011,
+    "bytes": 626,
+    "errors": 0,
+    "correct": true,
+    "strategy": "sitemap roots"
+   }
+  },
+  "part2_k3": {
+   "S1": {
+    "calls": 1,
+    "wall": 0.004,
+    "bytes": 240,
+    "errors": 0,
+    "correct": true,
+    "strategy": "order:desc limit:1"
+   },
+   "S2": {
+    "calls": 1,
+    "wall": 0.004,
+    "bytes": 200,
+    "errors": 0,
+    "correct": true,
+    "strategy": "limit:1 + totalCount",
+    "value": 1662
+   },
+   "S3": {
+    "calls": 1,
+    "wall": 0.09,
+    "bytes": 345,
+    "errors": 0,
+    "correct": true,
+    "strategy": "one HTTPQL query"
+   },
+   "S4": {
+    "calls": 1,
+    "wall": 0.011,
+    "bytes": 627,
+    "errors": 0,
+    "correct": true,
+    "strategy": "sitemap roots"
+   }
+  },
+  "part2_k4": {
+   "S1": {
+    "calls": 1,
+    "wall": 0.005,
+    "bytes": 240,
+    "errors": 0,
+    "correct": true,
+    "strategy": "order:desc limit:1"
+   },
+   "S2": {
+    "calls": 1,
+    "wall": 0.006,
+    "bytes": 200,
+    "errors": 0,
+    "correct": true,
+    "strategy": "limit:1 + totalCount",
+    "value": 2216
+   },
+   "S3": {
+    "calls": 1,
+    "wall": 0.131,
+    "bytes": 445,
+    "errors": 0,
+    "correct": true,
+    "strategy": "one HTTPQL query"
+   },
+   "S4": {
+    "calls": 1,
+    "wall": 0.011,
+    "bytes": 627,
+    "errors": 0,
+    "correct": true,
+    "strategy": "sitemap roots"
+   }
+  },
+  "part2_k5": {
+   "S1": {
+    "calls": 1,
+    "wall": 0.006,
+    "bytes": 246,
+    "errors": 0,
+    "correct": true,
+    "strategy": "order:desc limit:1"
+   },
+   "S2": {
+    "calls": 1,
+    "wall": 0.007,
+    "bytes": 200,
+    "errors": 0,
+    "correct": true,
+    "strategy": "limit:1 + totalCount",
+    "value": 2770
+   },
+   "S3": {
+    "calls": 1,
+    "wall": 0.179,
+    "bytes": 545,
+    "errors": 0,
+    "correct": true,
+    "strategy": "one HTTPQL query"
+   },
+   "S4": {
+    "calls": 1,
+    "wall": 0.013,
+    "bytes": 628,
+    "errors": 0,
+    "correct": true,
+    "strategy": "sitemap roots"
+   }
+  }
+ },
+ "caido_rss": {
+  "1": {
+   "requests": 20009,
+   "rss_mb": 554
+  },
+  "2": {
+   "requests": 40010,
+   "rss_mb": 648
+  },
+  "3": {
+   "requests": 60011,
+   "rss_mb": 763
+  },
+  "4": {
+   "requests": 80012,
+   "rss_mb": 962
+  },
+  "5": {
+   "requests": 100013,
+   "rss_mb": 1176
+  }
+ }
+}

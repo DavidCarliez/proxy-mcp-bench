@@ -1,0 +1,1281 @@
+{
+ "part1": {
+  "burp-official": {
+   "T1": {
+    "calls": 31,
+    "bytes": 20043,
+    "wall": 3.921,
+    "correct": true,
+    "strategy": "no newest-first: exponential+binary search on offset with count=1, then keep the last valid item",
+    "infeasible": false
+   },
+   "T2": {
+    "calls": 1,
+    "bytes": 1014,
+    "wall": 0.097,
+    "correct": true,
+    "strategy": "get_proxy_http_history_regex{regex:'FLAG\\\\{needle-7f3a91\\\\}',count:100,offset:0}",
+    "infeasible": false
+   },
+   "T3": {
+    "calls": 1,
+    "bytes": 10032,
+    "wall": 0.09,
+    "correct": false,
+    "strategy": "get_proxy_http_history_regex{regex:'AKIAQ3EXAMPLEKEY7777'}; items truncated at 5,000 chars",
+    "infeasible": false
+   },
+   "T4": {
+    "calls": 1,
+    "bytes": 1273,
+    "wall": 0.091,
+    "correct": true,
+    "strategy": "get_proxy_http_history_regex{regex:'X-Debug-Token: dbg-41c2'}",
+    "infeasible": false
+   },
+   "T5": {
+    "calls": 2,
+    "bytes": 269749,
+    "wall": 0.176,
+    "correct": true,
+    "strategy": "no count/filter: page get_proxy_http_history_regex{regex:'^HTTP/1.1 403'} in 500-item pages and count",
+    "infeasible": false
+   },
+   "T6": {
+    "calls": 1,
+    "bytes": 3985,
+    "wall": 0.102,
+    "correct": true,
+    "strategy": "get_proxy_http_history_regex{regex:'<svg/onload=omp'}",
+    "infeasible": false
+   },
+   "T7": {
+    "calls": 1,
+    "bytes": 13387,
+    "wall": 0.561,
+    "correct": true,
+    "strategy": "get_proxy_http_history_regex{regex:'(url=|callback=|redirect_uri=)'}",
+    "infeasible": false
+   },
+   "T8": {
+    "calls": 2,
+    "bytes": 53859,
+    "wall": 0.199,
+    "correct": true,
+    "strategy": "2x get_proxy_http_history_regex count by paging",
+    "infeasible": false
+   },
+   "T9": {
+    "calls": 1,
+    "bytes": 668573,
+    "wall": 0.037,
+    "correct": true,
+    "strategy": "no sitemap/no fields: page history 500 items at a time and parse 'Host:'",
+    "infeasible": false
+   },
+   "T10": {
+    "calls": 1,
+    "bytes": 15049,
+    "wall": 0.111,
+    "correct": false,
+    "strategy": "no slicing tool: regex for the path, then read the item (5,000-char per-item cap)",
+    "infeasible": false
+   },
+   "T11": {
+    "calls": 2,
+    "bytes": 403185,
+    "wall": 0.205,
+    "correct": true,
+    "strategy": "page get_proxy_http_history_regex{regex:'POST /api/v1/orders'} and count",
+    "infeasible": false
+   },
+   "T12": {
+    "calls": 11,
+    "bytes": 5098692,
+    "wall": 1.662,
+    "correct": true,
+    "strategy": "page get_proxy_http_history_regex{regex:'user\\\\d+@example\\\\.test'} and count items",
+    "infeasible": false
+   },
+   "T13": {
+    "calls": 2,
+    "bytes": 3859,
+    "wall": 1.103,
+    "correct": true,
+    "strategy": "regex to fetch the raw request, edit a header, send_http1_request",
+    "infeasible": false
+   },
+   "T14": {
+    "calls": 1,
+    "bytes": 32500,
+    "wall": 0.135,
+    "correct": false,
+    "strategy": "regex for the .png item, read its bytes (5,000-char per-item cap)",
+    "infeasible": false
+   }
+  },
+  "burp-fork": {
+   "T1": {
+    "calls": 1,
+    "bytes": 701,
+    "wall": 0.024,
+    "correct": true,
+    "strategy": "get_latest_proxy_http_history{count:1}",
+    "infeasible": false
+   },
+   "T2": {
+    "calls": 1,
+    "bytes": 111,
+    "wall": 0.158,
+    "correct": true,
+    "strategy": "get_proxy_http_history_regex{regex:'FLAG..',count:5,fields:[index,method,url,statusCode]} (unchanged); alt = search_proxy_http_history",
+    "infeasible": false
+   },
+   "T3": {
+    "calls": 1,
+    "bytes": 706,
+    "wall": 0.12,
+    "correct": true,
+    "strategy": "search_proxy_http_history{regex:'AKIAQ3EXAMPLEKEY7777'} - returns the hit with context",
+    "infeasible": false
+   },
+   "T4": {
+    "calls": 1,
+    "bytes": 70,
+    "wall": 0.114,
+    "correct": true,
+    "strategy": "get_proxy_http_history_regex{regex:'X-Debug-Token: dbg-41c2'}",
+    "infeasible": false
+   },
+   "T5": {
+    "calls": 1,
+    "bytes": 92,
+    "wall": 0.108,
+    "correct": true,
+    "strategy": "get_proxy_http_history_filtered{host:admin.localhost,statusCode:403,count:1} -> totalMatches",
+    "infeasible": false
+   },
+   "T6": {
+    "calls": 1,
+    "bytes": 489,
+    "wall": 0.125,
+    "correct": true,
+    "strategy": "get_proxy_http_history_regex{regex:'<svg/onload=omp'} (unchanged); alt = search_proxy_http_history",
+    "infeasible": false
+   },
+   "T7": {
+    "calls": 1,
+    "bytes": 3259,
+    "wall": 0.603,
+    "correct": true,
+    "strategy": "get_proxy_http_history_regex{regex:'(url=|callback=|redirect_uri=)'}",
+    "infeasible": false
+   },
+   "T8": {
+    "calls": 2,
+    "bytes": 4,
+    "wall": 0.231,
+    "correct": true,
+    "strategy": "2x get_proxy_http_history_count{regex}",
+    "infeasible": false
+   },
+   "T9": {
+    "calls": 7,
+    "bytes": 25923,
+    "wall": 0.593,
+    "correct": true,
+    "strategy": "page history 500 at a time with fields:[host] (no sitemap tool)",
+    "infeasible": false
+   },
+   "T10": {
+    "calls": 2,
+    "bytes": 2329,
+    "wall": 0.134,
+    "correct": true,
+    "strategy": "filtered{pathContains:/big/report.json} then get_proxy_http_history_body{offset:600000,length:2000}",
+    "infeasible": false
+   },
+   "T11": {
+    "calls": 1,
+    "bytes": 88,
+    "wall": 0.105,
+    "correct": true,
+    "strategy": "filtered{method:POST,host:api.localhost,pathContains:/api/v1/orders,count:1} -> totalMatches",
+    "infeasible": false
+   },
+   "T12": {
+    "calls": 2,
+    "bytes": 500,
+    "wall": 0.319,
+    "correct": true,
+    "strategy": "count{regex} + regex page of 10",
+    "infeasible": false
+   },
+   "T13": {
+    "calls": 4,
+    "bytes": 1680,
+    "wall": 1.284,
+    "correct": true,
+    "strategy": "filtered 401 -> send_http_request_from_history{replaceHeaders}",
+    "infeasible": false
+   },
+   "T14": {
+    "calls": 2,
+    "bytes": 12193,
+    "wall": 0.115,
+    "correct": true,
+    "strategy": "filtered{.png} -> body slice, latin-1 round trip",
+    "infeasible": false
+   }
+  },
+  "caido-official": {
+   "T1": {
+    "calls": 15,
+    "bytes": 1898,
+    "wall": 0.024,
+    "correct": true,
+    "strategy": "row.id bisection (undocumented trick), then last page",
+    "infeasible": false
+   },
+   "T2": {
+    "calls": 1,
+    "bytes": 130,
+    "wall": 0.04,
+    "correct": true,
+    "strategy": "one HTTPQL query",
+    "infeasible": false
+   },
+   "T4": {
+    "calls": 1,
+    "bytes": 122,
+    "wall": 0.025,
+    "correct": true,
+    "strategy": "one HTTPQL query",
+    "infeasible": false
+   },
+   "T6": {
+    "calls": 1,
+    "bytes": 618,
+    "wall": 0.039,
+    "correct": true,
+    "strategy": "one HTTPQL query",
+    "infeasible": false
+   },
+   "T7": {
+    "calls": 1,
+    "bytes": 3819,
+    "wall": 0.008,
+    "correct": true,
+    "strategy": "one HTTPQL query",
+    "infeasible": false
+   },
+   "T3": {
+    "calls": 3,
+    "bytes": 349720,
+    "wall": 0.112,
+    "correct": true,
+    "strategy": "find rows, then pull each ~160 KB body to read the key",
+    "infeasible": false
+   },
+   "T5": {
+    "calls": 6,
+    "bytes": 53856,
+    "wall": 0.03,
+    "correct": true,
+    "strategy": "page every match (limit 100) and count",
+    "infeasible": false
+   },
+   "T11": {
+    "calls": 6,
+    "bytes": 58163,
+    "wall": 0.032,
+    "correct": true,
+    "strategy": "page every match (limit 100) and count",
+    "infeasible": false
+   },
+   "T12": {
+    "calls": 53,
+    "bytes": 522269,
+    "wall": 1.015,
+    "correct": true,
+    "strategy": "page every match (limit 100) and count",
+    "infeasible": false
+   },
+   "T8": {
+    "calls": 2,
+    "bytes": 9003,
+    "wall": 0.008,
+    "correct": true,
+    "strategy": "page every match (limit 100) and count (x2)",
+    "infeasible": false
+   },
+   "T9": {
+    "calls": 1,
+    "bytes": 465,
+    "wall": 0.002,
+    "correct": true,
+    "strategy": "sitemap roots",
+    "infeasible": false
+   },
+   "T10": {
+    "calls": 2,
+    "bytes": 2477,
+    "wall": 0.013,
+    "correct": true,
+    "strategy": "find row, read a byte window",
+    "infeasible": false
+   },
+   "T13": {
+    "calls": 2,
+    "bytes": 1008,
+    "wall": 1.29,
+    "correct": true,
+    "strategy": "edit_request removeHeaders",
+    "infeasible": false
+   },
+   "T14": {
+    "calls": 2,
+    "bytes": 30195,
+    "wall": 0.004,
+    "correct": false,
+    "strategy": "get_request body (text)",
+    "infeasible": false
+   }
+  },
+  "caido-official_naive": {
+   "T1_naive": {
+    "calls": 201,
+    "bytes": 1997685,
+    "wall": 1.2,
+    "correct": true,
+    "strategy": "page from the oldest row to the end",
+    "infeasible": false
+   }
+  },
+  "caido-fork": {
+   "T1": {
+    "calls": 1,
+    "bytes": 240,
+    "wall": 0.003,
+    "correct": true,
+    "strategy": "order:desc limit:1",
+    "infeasible": false
+   },
+   "T2": {
+    "calls": 1,
+    "bytes": 145,
+    "wall": 0.034,
+    "correct": true,
+    "strategy": "one HTTPQL query",
+    "infeasible": false
+   },
+   "T4": {
+    "calls": 1,
+    "bytes": 137,
+    "wall": 0.026,
+    "correct": true,
+    "strategy": "one HTTPQL query",
+    "infeasible": false
+   },
+   "T6": {
+    "calls": 1,
+    "bytes": 633,
+    "wall": 0.035,
+    "correct": true,
+    "strategy": "one HTTPQL query",
+    "infeasible": false
+   },
+   "T7": {
+    "calls": 1,
+    "bytes": 3835,
+    "wall": 0.008,
+    "correct": true,
+    "strategy": "one HTTPQL query",
+    "infeasible": false
+   },
+   "T3": {
+    "calls": 1,
+    "bytes": 558,
+    "wall": 0.095,
+    "correct": true,
+    "strategy": "one query with a regex snippet",
+    "infeasible": false
+   },
+   "T5": {
+    "calls": 1,
+    "bytes": 199,
+    "wall": 0.003,
+    "correct": true,
+    "strategy": "limit:1 + totalCount",
+    "infeasible": false
+   },
+   "T11": {
+    "calls": 1,
+    "bytes": 195,
+    "wall": 0.002,
+    "correct": true,
+    "strategy": "limit:1 + totalCount",
+    "infeasible": false
+   },
+   "T12": {
+    "calls": 1,
+    "bytes": 199,
+    "wall": 0.016,
+    "correct": true,
+    "strategy": "limit:1 + totalCount",
+    "infeasible": false
+   },
+   "T8": {
+    "calls": 2,
+    "bytes": 392,
+    "wall": 0.006,
+    "correct": true,
+    "strategy": "limit:1 + totalCount (x2)",
+    "infeasible": false
+   },
+   "T9": {
+    "calls": 1,
+    "bytes": 623,
+    "wall": 0.01,
+    "correct": true,
+    "strategy": "sitemap roots",
+    "infeasible": false
+   },
+   "T10": {
+    "calls": 2,
+    "bytes": 2492,
+    "wall": 0.015,
+    "correct": true,
+    "strategy": "find row, read a byte window",
+    "infeasible": false
+   },
+   "T13": {
+    "calls": 2,
+    "bytes": 1026,
+    "wall": 1.295,
+    "correct": true,
+    "strategy": "edit_request removeHeaders",
+    "infeasible": false
+   },
+   "T14": {
+    "calls": 2,
+    "bytes": 11026,
+    "wall": 0.005,
+    "correct": true,
+    "strategy": "get_request body (text)",
+    "infeasible": false
+   }
+  },
+  "caido-fork_naive": {}
+ },
+ "part2": {
+  "burp-official": {
+   "1": {
+    "S1": {
+     "calls": 31,
+     "bytes": 20043,
+     "wall": 3.877,
+     "correct": true,
+     "strategy": "exponential+binary offset search, count=1 pages",
+     "infeasible": false
+    },
+    "S2": {
+     "calls": 2,
+     "bytes": 269749,
+     "wall": 0.177,
+     "correct": true,
+     "strategy": "page get_proxy_http_history_regex{regex:'^HTTP/1.1 403'} and count",
+     "infeasible": false
+    },
+    "S3": {
+     "calls": 1,
+     "bytes": 1014,
+     "wall": 0.093,
+     "correct": true,
+     "strategy": "get_proxy_http_history_regex{regex:'FLAG...'} count by paging",
+     "infeasible": false
+    },
+    "S4": {
+     "calls": 1,
+     "bytes": 668573,
+     "wall": 0.038,
+     "correct": true,
+     "strategy": "page history 500 items at a time, parse 'Host:'",
+     "infeasible": false
+    }
+   },
+   "2": {
+    "S1": {
+     "calls": 33,
+     "bytes": 26267,
+     "wall": 8.16,
+     "correct": true,
+     "strategy": "exponential+binary offset search, count=1 pages",
+     "infeasible": false
+    },
+    "S2": {
+     "calls": 3,
+     "bytes": 539500,
+     "wall": 0.519,
+     "correct": true,
+     "strategy": "page get_proxy_http_history_regex{regex:'^HTTP/1.1 403'} and count",
+     "infeasible": false
+    },
+    "S3": {
+     "calls": 1,
+     "bytes": 2030,
+     "wall": 0.181,
+     "correct": true,
+     "strategy": "get_proxy_http_history_regex{regex:'FLAG...'} count by paging",
+     "infeasible": false
+    },
+    "S4": {
+     "calls": 1,
+     "bytes": 668573,
+     "wall": 0.05,
+     "correct": true,
+     "strategy": "page history 500 items at a time, parse 'Host:'",
+     "infeasible": false
+    }
+   },
+   "3": {
+    "S1": {
+     "calls": 33,
+     "bytes": 28617,
+     "wall": 11.786,
+     "correct": true,
+     "strategy": "exponential+binary offset search, count=1 pages",
+     "infeasible": false
+    },
+    "S2": {
+     "calls": 4,
+     "bytes": 809251,
+     "wall": 1.076,
+     "correct": true,
+     "strategy": "page get_proxy_http_history_regex{regex:'^HTTP/1.1 403'} and count",
+     "infeasible": false
+    },
+    "S3": {
+     "calls": 1,
+     "bytes": 3046,
+     "wall": 0.274,
+     "correct": true,
+     "strategy": "get_proxy_http_history_regex{regex:'FLAG...'} count by paging",
+     "infeasible": false
+    },
+    "S4": {
+     "calls": 1,
+     "bytes": 668573,
+     "wall": 0.063,
+     "correct": true,
+     "strategy": "page history 500 items at a time, parse 'Host:'",
+     "infeasible": false
+    }
+   },
+   "4": {
+    "S1": {
+     "calls": 35,
+     "bytes": 24858,
+     "wall": 17.134,
+     "correct": true,
+     "strategy": "exponential+binary offset search, count=1 pages",
+     "infeasible": false
+    },
+    "S2": {
+     "calls": 5,
+     "bytes": 1079002,
+     "wall": 1.759,
+     "correct": true,
+     "strategy": "page get_proxy_http_history_regex{regex:'^HTTP/1.1 403'} and count",
+     "infeasible": false
+    },
+    "S3": {
+     "calls": 1,
+     "bytes": 4062,
+     "wall": 0.362,
+     "correct": true,
+     "strategy": "get_proxy_http_history_regex{regex:'FLAG...'} count by paging",
+     "infeasible": false
+    },
+    "S4": {
+     "calls": 1,
+     "bytes": 668573,
+     "wall": 0.076,
+     "correct": true,
+     "strategy": "page history 500 items at a time, parse 'Host:'",
+     "infeasible": false
+    }
+   },
+   "5": {
+    "S1": {
+     "calls": 35,
+     "bytes": 24838,
+     "wall": 21.685,
+     "correct": true,
+     "strategy": "exponential+binary offset search, count=1 pages",
+     "infeasible": false
+    },
+    "S2": {
+     "calls": 6,
+     "bytes": 1348753,
+     "wall": 2.747,
+     "correct": true,
+     "strategy": "page get_proxy_http_history_regex{regex:'^HTTP/1.1 403'} and count",
+     "infeasible": false
+    },
+    "S3": {
+     "calls": 1,
+     "bytes": 5078,
+     "wall": 0.502,
+     "correct": true,
+     "strategy": "get_proxy_http_history_regex{regex:'FLAG...'} count by paging",
+     "infeasible": false
+    },
+    "S4": {
+     "calls": 1,
+     "bytes": 668573,
+     "wall": 0.097,
+     "correct": true,
+     "strategy": "page history 500 items at a time, parse 'Host:'",
+     "infeasible": false
+    }
+   }
+  },
+  "burp-fork": {
+   "1": {
+    "S1": {
+     "calls": 1,
+     "bytes": 701,
+     "wall": 0.025,
+     "correct": true,
+     "strategy": "get_latest_proxy_http_history{count:1}",
+     "infeasible": false
+    },
+    "S2": {
+     "calls": 1,
+     "bytes": 92,
+     "wall": 0.096,
+     "correct": true,
+     "strategy": "filtered{host:admin.localhost,statusCode:403,count:1} -> totalMatches",
+     "infeasible": false
+    },
+    "S3": {
+     "calls": 1,
+     "bytes": 1,
+     "wall": 0.098,
+     "correct": true,
+     "strategy": "get_proxy_http_history_count{regex:'FLAG...'}",
+     "infeasible": false
+    },
+    "S4": {
+     "calls": 2,
+     "bytes": 51814,
+     "wall": 0.063,
+     "correct": true,
+     "strategy": "2 pages of get_proxy_http_history{count:500,newestFirst,fields:[host]}",
+     "infeasible": false
+    }
+   },
+   "2": {
+    "S1": {
+     "calls": 1,
+     "bytes": 701,
+     "wall": 0.096,
+     "correct": true,
+     "strategy": "get_latest_proxy_http_history{count:1}",
+     "infeasible": false
+    },
+    "S2": {
+     "calls": 1,
+     "bytes": 93,
+     "wall": 0.371,
+     "correct": true,
+     "strategy": "filtered{host:admin.localhost,statusCode:403,count:1} -> totalMatches",
+     "infeasible": false
+    },
+    "S3": {
+     "calls": 1,
+     "bytes": 1,
+     "wall": 0.253,
+     "correct": true,
+     "strategy": "get_proxy_http_history_count{regex:'FLAG...'}",
+     "infeasible": false
+    },
+    "S4": {
+     "calls": 2,
+     "bytes": 51813,
+     "wall": 0.113,
+     "correct": true,
+     "strategy": "2 pages of get_proxy_http_history{count:500,newestFirst,fields:[host]}",
+     "infeasible": false
+    }
+   },
+   "3": {
+    "S1": {
+     "calls": 1,
+     "bytes": 701,
+     "wall": 0.061,
+     "correct": true,
+     "strategy": "get_latest_proxy_http_history{count:1}",
+     "infeasible": false
+    },
+    "S2": {
+     "calls": 1,
+     "bytes": 93,
+     "wall": 0.315,
+     "correct": true,
+     "strategy": "filtered{host:admin.localhost,statusCode:403,count:1} -> totalMatches",
+     "infeasible": false
+    },
+    "S3": {
+     "calls": 1,
+     "bytes": 1,
+     "wall": 0.298,
+     "correct": true,
+     "strategy": "get_proxy_http_history_count{regex:'FLAG...'}",
+     "infeasible": false
+    },
+    "S4": {
+     "calls": 2,
+     "bytes": 51813,
+     "wall": 0.114,
+     "correct": true,
+     "strategy": "2 pages of get_proxy_http_history{count:500,newestFirst,fields:[host]}",
+     "infeasible": false
+    }
+   },
+   "4": {
+    "S1": {
+     "calls": 1,
+     "bytes": 701,
+     "wall": 0.066,
+     "correct": true,
+     "strategy": "get_latest_proxy_http_history{count:1}",
+     "infeasible": false
+    },
+    "S2": {
+     "calls": 1,
+     "bytes": 93,
+     "wall": 0.402,
+     "correct": true,
+     "strategy": "filtered{host:admin.localhost,statusCode:403,count:1} -> totalMatches",
+     "infeasible": false
+    },
+    "S3": {
+     "calls": 1,
+     "bytes": 1,
+     "wall": 0.417,
+     "correct": true,
+     "strategy": "get_proxy_http_history_count{regex:'FLAG...'}",
+     "infeasible": false
+    },
+    "S4": {
+     "calls": 2,
+     "bytes": 51813,
+     "wall": 0.175,
+     "correct": true,
+     "strategy": "2 pages of get_proxy_http_history{count:500,newestFirst,fields:[host]}",
+     "infeasible": false
+    }
+   },
+   "5": {
+    "S1": {
+     "calls": 1,
+     "bytes": 703,
+     "wall": 0.106,
+     "correct": true,
+     "strategy": "get_latest_proxy_http_history{count:1}",
+     "infeasible": false
+    },
+    "S2": {
+     "calls": 1,
+     "bytes": 93,
+     "wall": 0.596,
+     "correct": true,
+     "strategy": "filtered{host:admin.localhost,statusCode:403,count:1} -> totalMatches",
+     "infeasible": false
+    },
+    "S3": {
+     "calls": 1,
+     "bytes": 1,
+     "wall": 0.59,
+     "correct": true,
+     "strategy": "get_proxy_http_history_count{regex:'FLAG...'}",
+     "infeasible": false
+    },
+    "S4": {
+     "calls": 2,
+     "bytes": 51827,
+     "wall": 0.208,
+     "correct": true,
+     "strategy": "2 pages of get_proxy_http_history{count:500,newestFirst,fields:[host]}",
+     "infeasible": false
+    }
+   }
+  },
+  "caido-official": {
+   "1": {
+    "S1": {
+     "calls": 15,
+     "bytes": 2264,
+     "wall": 0.029,
+     "correct": true,
+     "strategy": "row.id bisection (undocumented trick), then last page",
+     "infeasible": false
+    },
+    "S1_naive": {
+     "calls": 201,
+     "bytes": 1998051,
+     "wall": 1.125,
+     "correct": true,
+     "strategy": "page to the end",
+     "infeasible": false
+    },
+    "S2": {
+     "calls": 6,
+     "bytes": 53856,
+     "wall": 0.03,
+     "correct": true,
+     "strategy": "page every match (limit 100) and count",
+     "infeasible": false
+    },
+    "S3": {
+     "calls": 1,
+     "bytes": 130,
+     "wall": 0.041,
+     "correct": true,
+     "strategy": "one HTTPQL query",
+     "infeasible": false
+    },
+    "S4": {
+     "calls": 1,
+     "bytes": 465,
+     "wall": 0.002,
+     "correct": true,
+     "strategy": "sitemap roots",
+     "infeasible": false
+    }
+   },
+   "2": {
+    "S1": {
+     "calls": 17,
+     "bytes": 2650,
+     "wall": 0.031,
+     "correct": true,
+     "strategy": "row.id bisection (undocumented trick), then last page",
+     "infeasible": false
+    },
+    "S1_naive": {
+     "calls": 401,
+     "bytes": 4006446,
+     "wall": 2.298,
+     "correct": true,
+     "strategy": "page to the end",
+     "infeasible": false
+    },
+    "S2": {
+     "calls": 12,
+     "bytes": 108083,
+     "wall": 0.07,
+     "correct": true,
+     "strategy": "page every match (limit 100) and count",
+     "infeasible": false
+    },
+    "S3": {
+     "calls": 1,
+     "bytes": 230,
+     "wall": 0.069,
+     "correct": true,
+     "strategy": "one HTTPQL query",
+     "infeasible": false
+    },
+    "S4": {
+     "calls": 1,
+     "bytes": 465,
+     "wall": 0.002,
+     "correct": true,
+     "strategy": "sitemap roots",
+     "infeasible": false
+    }
+   },
+   "3": {
+    "S1": {
+     "calls": 17,
+     "bytes": 3076,
+     "wall": 0.038,
+     "correct": true,
+     "strategy": "row.id bisection (undocumented trick), then last page",
+     "infeasible": false
+    },
+    "S1_naive": {
+     "calls": 601,
+     "bytes": 6014841,
+     "wall": 3.414,
+     "correct": true,
+     "strategy": "page to the end",
+     "infeasible": false
+    },
+    "S2": {
+     "calls": 17,
+     "bytes": 162221,
+     "wall": 0.115,
+     "correct": true,
+     "strategy": "page every match (limit 100) and count",
+     "infeasible": false
+    },
+    "S3": {
+     "calls": 1,
+     "bytes": 330,
+     "wall": 0.113,
+     "correct": true,
+     "strategy": "one HTTPQL query",
+     "infeasible": false
+    },
+    "S4": {
+     "calls": 1,
+     "bytes": 465,
+     "wall": 0.002,
+     "correct": true,
+     "strategy": "sitemap roots",
+     "infeasible": false
+    }
+   },
+   "4": {
+    "S1": {
+     "calls": 19,
+     "bytes": 3092,
+     "wall": 0.047,
+     "correct": true,
+     "strategy": "row.id bisection (undocumented trick), then last page",
+     "infeasible": false
+    },
+    "S1_naive": {
+     "calls": 801,
+     "bytes": 8023236,
+     "wall": 5.087,
+     "correct": true,
+     "strategy": "page to the end",
+     "infeasible": false
+    },
+    "S2": {
+     "calls": 23,
+     "bytes": 216448,
+     "wall": 0.187,
+     "correct": true,
+     "strategy": "page every match (limit 100) and count",
+     "infeasible": false
+    },
+    "S3": {
+     "calls": 1,
+     "bytes": 430,
+     "wall": 0.166,
+     "correct": true,
+     "strategy": "one HTTPQL query",
+     "infeasible": false
+    },
+    "S4": {
+     "calls": 1,
+     "bytes": 465,
+     "wall": 0.002,
+     "correct": true,
+     "strategy": "sitemap roots",
+     "infeasible": false
+    }
+   },
+   "5": {
+    "S1": {
+     "calls": 19,
+     "bytes": 3357,
+     "wall": 0.049,
+     "correct": true,
+     "strategy": "row.id bisection (undocumented trick), then last page",
+     "infeasible": false
+    },
+    "S1_naive": {
+     "calls": 1001,
+     "bytes": 10031649,
+     "wall": 6.897,
+     "correct": true,
+     "strategy": "page to the end",
+     "infeasible": false
+    },
+    "S2": {
+     "calls": 28,
+     "bytes": 270586,
+     "wall": 0.259,
+     "correct": true,
+     "strategy": "page every match (limit 100) and count",
+     "infeasible": false
+    },
+    "S3": {
+     "calls": 1,
+     "bytes": 530,
+     "wall": 0.203,
+     "correct": true,
+     "strategy": "one HTTPQL query",
+     "infeasible": false
+    },
+    "S4": {
+     "calls": 1,
+     "bytes": 465,
+     "wall": 0.002,
+     "correct": true,
+     "strategy": "sitemap roots",
+     "infeasible": false
+    }
+   }
+  },
+  "caido-fork": {
+   "1": {
+    "S1": {
+     "calls": 1,
+     "bytes": 236,
+     "wall": 0.003,
+     "correct": true,
+     "strategy": "order:desc limit:1",
+     "infeasible": false
+    },
+    "S2": {
+     "calls": 1,
+     "bytes": 199,
+     "wall": 0.003,
+     "correct": true,
+     "strategy": "limit:1 + totalCount",
+     "infeasible": false
+    },
+    "S3": {
+     "calls": 1,
+     "bytes": 145,
+     "wall": 0.031,
+     "correct": true,
+     "strategy": "one HTTPQL query",
+     "infeasible": false
+    },
+    "S4": {
+     "calls": 1,
+     "bytes": 623,
+     "wall": 0.008,
+     "correct": true,
+     "strategy": "sitemap roots",
+     "infeasible": false
+    }
+   },
+   "2": {
+    "S1": {
+     "calls": 1,
+     "bytes": 240,
+     "wall": 0.004,
+     "correct": true,
+     "strategy": "order:desc limit:1",
+     "infeasible": false
+    },
+    "S2": {
+     "calls": 1,
+     "bytes": 200,
+     "wall": 0.004,
+     "correct": true,
+     "strategy": "limit:1 + totalCount",
+     "infeasible": false
+    },
+    "S3": {
+     "calls": 1,
+     "bytes": 245,
+     "wall": 0.053,
+     "correct": true,
+     "strategy": "one HTTPQL query",
+     "infeasible": false
+    },
+    "S4": {
+     "calls": 1,
+     "bytes": 626,
+     "wall": 0.011,
+     "correct": true,
+     "strategy": "sitemap roots",
+     "infeasible": false
+    }
+   },
+   "3": {
+    "S1": {
+     "calls": 1,
+     "bytes": 240,
+     "wall": 0.004,
+     "correct": true,
+     "strategy": "order:desc limit:1",
+     "infeasible": false
+    },
+    "S2": {
+     "calls": 1,
+     "bytes": 200,
+     "wall": 0.004,
+     "correct": true,
+     "strategy": "limit:1 + totalCount",
+     "infeasible": false
+    },
+    "S3": {
+     "calls": 1,
+     "bytes": 345,
+     "wall": 0.09,
+     "correct": true,
+     "strategy": "one HTTPQL query",
+     "infeasible": false
+    },
+    "S4": {
+     "calls": 1,
+     "bytes": 627,
+     "wall": 0.011,
+     "correct": true,
+     "strategy": "sitemap roots",
+     "infeasible": false
+    }
+   },
+   "4": {
+    "S1": {
+     "calls": 1,
+     "bytes": 240,
+     "wall": 0.005,
+     "correct": true,
+     "strategy": "order:desc limit:1",
+     "infeasible": false
+    },
+    "S2": {
+     "calls": 1,
+     "bytes": 200,
+     "wall": 0.006,
+     "correct": true,
+     "strategy": "limit:1 + totalCount",
+     "infeasible": false
+    },
+    "S3": {
+     "calls": 1,
+     "bytes": 445,
+     "wall": 0.131,
+     "correct": true,
+     "strategy": "one HTTPQL query",
+     "infeasible": false
+    },
+    "S4": {
+     "calls": 1,
+     "bytes": 627,
+     "wall": 0.011,
+     "correct": true,
+     "strategy": "sitemap roots",
+     "infeasible": false
+    }
+   },
+   "5": {
+    "S1": {
+     "calls": 1,
+     "bytes": 246,
+     "wall": 0.006,
+     "correct": true,
+     "strategy": "order:desc limit:1",
+     "infeasible": false
+    },
+    "S2": {
+     "calls": 1,
+     "bytes": 200,
+     "wall": 0.007,
+     "correct": true,
+     "strategy": "limit:1 + totalCount",
+     "infeasible": false
+    },
+    "S3": {
+     "calls": 1,
+     "bytes": 545,
+     "wall": 0.179,
+     "correct": true,
+     "strategy": "one HTTPQL query",
+     "infeasible": false
+    },
+    "S4": {
+     "calls": 1,
+     "bytes": 628,
+     "wall": 0.013,
+     "correct": true,
+     "strategy": "sitemap roots",
+     "infeasible": false
+    }
+   }
+  }
+ },
+ "part3": {
+  "burp-official": {
+   "tools": 27,
+   "bytes": 8547,
+   "approx_tokens": 2136
+  },
+  "burp-fork": {
+   "tools": 43,
+   "bytes": 17197,
+   "approx_tokens": 4299
+  },
+  "caido-official": {
+   "tools": 70,
+   "bytes": 82932,
+   "approx_tokens": 20733
+  },
+  "caido-fork": {
+   "tools": 70,
+   "bytes": 88721,
+   "approx_tokens": 22180
+  }
+ },
+ "rss": {
+  "Burp": {
+   "1": 2136,
+   "2": 2228,
+   "3": 3866,
+   "4": 3963,
+   "5": 3918
+  },
+  "Caido": {
+   "1": 554,
+   "2": 648,
+   "3": 763,
+   "4": 962,
+   "5": 1176
+  }
+ },
+ "meta": {
+  "burp-official": {
+   "manifest_version": "1.3.0",
+   "serverInfo": {
+    "name": "burp-suite",
+    "version": "1.1.2"
+   },
+   "approvals": "pre-granted: 'Always Allow HTTP history' + 'Always Allow Host' for the 6 *.localhost vhosts"
+  },
+  "burp-fork": {
+   "manifest_version": "1.3.0-enhanced.1",
+   "serverInfo": {
+    "name": "burp-suite",
+    "version": "1.3.0-enhanced.1"
+   },
+   "approvals": "pre-granted: 'Always Allow HTTP history' + 'Always Allow Host' for the 6 *.localhost vhosts; no dialog during agent runs"
+  }
+ },
+ "rss_burp_official": {
+  "1": 2501,
+  "2": 2650,
+  "3": 2980,
+  "4": 3626,
+  "5": 4559
+ },
+ "headline": [
+  [
+   "Find the newest of 20,001 requests \u00b7 Caido",
+   "201 calls",
+   "1 call"
+  ],
+  [
+   "Count 554 matching requests \u00b7 Burp",
+   "270 KB",
+   "92 B"
+  ],
+  [
+   "Six agent tasks, median tokens \u00b7 Burp",
+   "5.6M",
+   "0.46M"
+  ]
+ ]
+}

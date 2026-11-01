@@ -1,0 +1,6831 @@
+{
+ "burp-fork": {
+  "meta": {
+   "jar": "~/RT/burp-mcp-enhanced/build/libs/burpy.jar",
+   "sha256": "0b086237726a10752f0c9a0f5b344fa591bfa548f7d3e26bcf54701436db149c",
+   "manifest_version": "1.3.0-enhanced.1",
+   "serverInfo": {
+    "name": "burp-suite",
+    "version": "1.3.0-enhanced.1"
+   },
+   "project": "/tmp/burp-bench/fork.burp (Part 1/2) + fork2.burp (agent passes 2-3)",
+   "approvals": "pre-granted: 'Always Allow HTTP history' + 'Always Allow Host' for the 6 *.localhost vhosts; no dialog during agent runs",
+   "corpus_k1_seconds": 18.0,
+   "part1_notes": {
+    "wall_note": "T13 re-baselined to tool-only time; approval wait recorded in notes"
+   }
+  },
+  "part1": {
+   "T1": {
+    "id": "T1",
+    "calls": [
+     {
+      "tool": "get_latest_proxy_http_history",
+      "args": {
+       "count": 1
+      },
+      "wall": 0.024,
+      "bytes": 701,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "get_latest_proxy_http_history{count:1}",
+    "answer": "newest item is GET /api/v1/health?final=1",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.024,
+    "bytes": 701
+   },
+   "T2": {
+    "id": "T2",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "FLAG\\{needle-7f3a91\\}",
+       "count": 5,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index",
+        "method",
+        "url",
+        "statusCode"
+       ]
+      },
+      "wall": 0.169,
+      "bytes": 111,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "get_proxy_http_history_regex{regex:'FLAG\\\\{needle-7f3a91\\\\}',count:5,fields:[index,method,url,statusCode]}",
+    "answer": "1 item /api/v1/users/7777",
+    "correct": true,
+    "notes": "regex scans request+response bytes server-side",
+    "n_calls": 1,
+    "wall": 0.169,
+    "bytes": 111
+   },
+   "T3": {
+    "id": "T3",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "AKIAQ3EXAMPLEKEY7777",
+       "count": 5,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index",
+        "url",
+        "responseContentLength"
+       ]
+      },
+      "wall": 0.161,
+      "bytes": 234,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "get_proxy_http_history_regex{regex:'AKIAQ3EXAMPLEKEY7777',count:5,fields:[index,url,responseContentLength]}",
+    "answer": "2 items /assets/vendor.3c9e.js",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.161,
+    "bytes": 234
+   },
+   "T4": {
+    "id": "T4",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "X-Debug-Token: dbg-41c2",
+       "count": 5,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index",
+        "url"
+       ]
+      },
+      "wall": 0.161,
+      "bytes": 70,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "get_proxy_http_history_regex{regex:'X-Debug-Token: dbg-41c2'}",
+    "answer": "1 item shop /product/1, global index=8889",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.161,
+    "bytes": 70
+   },
+   "T5": {
+    "id": "T5",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_filtered",
+      "args": {
+       "host": "admin.localhost",
+       "statusCode": 403,
+       "count": 1,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index"
+       ]
+      },
+      "wall": 0.132,
+      "bytes": 92,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "get_proxy_http_history_filtered{host:admin.localhost,statusCode:403,count:1} -> totalMatches",
+    "answer": "totalMatches=554 (expected 554)",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.132,
+    "bytes": 92
+   },
+   "T6": {
+    "id": "T6",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "<svg/onload=omp",
+       "count": 20,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index",
+        "url"
+       ]
+      },
+      "wall": 0.168,
+      "bytes": 489,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "get_proxy_http_history_regex{regex:'<svg/onload=omp'}",
+    "answer": "5 (expected 5)",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.168,
+    "bytes": 489
+   },
+   "T7": {
+    "id": "T7",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "(url=|callback=|redirect_uri=)",
+       "count": 60,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index",
+        "url"
+       ]
+      },
+      "wall": 0.85,
+      "bytes": 3259,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "get_proxy_http_history_regex{regex:'(url=|callback=|redirect_uri=)'}",
+    "answer": "25 (expected 25)",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.85,
+    "bytes": 3259
+   },
+   "T8": {
+    "id": "T8",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_count",
+      "args": {
+       "regex": "Traceback"
+      },
+      "wall": 0.151,
+      "bytes": 2,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_count",
+      "args": {
+       "regex": "NullPointerException"
+      },
+      "wall": 0.126,
+      "bytes": 2,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "2x get_proxy_http_history_count{regex}",
+    "answer": "Traceback=42 NPE=52",
+    "correct": true,
+    "notes": "",
+    "n_calls": 2,
+    "wall": 0.277,
+    "bytes": 4
+   },
+   "T9": {
+    "id": "T9",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 500,
+       "offset": 0,
+       "newestFirst": true,
+       "fields": [
+        "host"
+       ]
+      },
+      "wall": 0.051,
+      "bytes": 25917,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_count",
+      "args": {
+       "regex": "^Host: admin\\.localhost\\r"
+      },
+      "wall": 0.123,
+      "bytes": 1,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_count",
+      "args": {
+       "regex": "^Host: api\\.localhost\\r"
+      },
+      "wall": 0.113,
+      "bytes": 1,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_count",
+      "args": {
+       "regex": "^Host: auth\\.localhost\\r"
+      },
+      "wall": 0.11,
+      "bytes": 1,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_count",
+      "args": {
+       "regex": "^Host: graphql\\.localhost\\r"
+      },
+      "wall": 0.108,
+      "bytes": 1,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_count",
+      "args": {
+       "regex": "^Host: shop\\.localhost\\r"
+      },
+      "wall": 0.1,
+      "bytes": 1,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_count",
+      "args": {
+       "regex": "^Host: static\\.localhost\\r"
+      },
+      "wall": 0.092,
+      "bytes": 1,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "sample history pages with fields:[host] + regex count per host (no sitemap tool)",
+    "answer": "6 hosts: ['admin.localhost', 'api.localhost', 'auth.localhost', 'graphql.localhost', 'shop.localhost', 'static.localhost']",
+    "correct": true,
+    "notes": "",
+    "n_calls": 7,
+    "wall": 0.697,
+    "bytes": 25923
+   },
+   "T10": {
+    "id": "T10",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_filtered",
+      "args": {
+       "pathContains": "/big/report.json",
+       "count": 5,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index",
+        "path",
+        "responseContentLength"
+       ]
+      },
+      "wall": 0.117,
+      "bytes": 329,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_body",
+      "args": {
+       "index": 303,
+       "message": "response",
+       "offset": 600000,
+       "length": 2000
+      },
+      "wall": 0.019,
+      "bytes": 2000,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "filtered{pathContains:/big/report.json} then get_proxy_http_history_body{offset:600000,length:2000}",
+    "answer": "index=303 slice_len=2000 exact_match=True",
+    "correct": true,
+    "notes": "",
+    "n_calls": 2,
+    "wall": 0.136,
+    "bytes": 2329
+   },
+   "T11": {
+    "id": "T11",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_filtered",
+      "args": {
+       "method": "POST",
+       "host": "api.localhost",
+       "pathContains": "/api/v1/orders",
+       "count": 1,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index"
+       ]
+      },
+      "wall": 0.108,
+      "bytes": 88,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "filtered{method:POST,host:api.localhost,pathContains:/api/v1/orders,count:1} -> totalMatches",
+    "answer": "totalMatches=598 (expected 598)",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.108,
+    "bytes": 88
+   },
+   "T12": {
+    "id": "T12",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_count",
+      "args": {
+       "regex": "user\\d+@example\\.test"
+      },
+      "wall": 0.136,
+      "bytes": 4,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "user\\d+@example\\.test",
+       "count": 10,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index",
+        "responseContentLength"
+       ]
+      },
+      "wall": 0.162,
+      "bytes": 494,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "count{regex} + regex page of 10",
+    "answer": "count=5211 items; page of 10 -> 10",
+    "correct": true,
+    "notes": "",
+    "n_calls": 2,
+    "wall": 0.298,
+    "bytes": 498
+   },
+   "T13": {
+    "id": "T13",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_filtered",
+      "args": {
+       "host": "api.localhost",
+       "statusCode": 401,
+       "count": 1,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index",
+        "url"
+       ]
+      },
+      "wall": 0.115,
+      "bytes": 143,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "send_http_request_from_history",
+      "args": {
+       "index": 47,
+       "replaceHeaders": {
+        "Authorization": "Bearer add-me"
+       }
+      },
+      "wall": 1.021,
+      "bytes": 596,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_filtered",
+      "args": {
+       "host": "admin.localhost",
+       "statusCode": 403,
+       "count": 1,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index",
+        "url"
+       ]
+      },
+      "wall": 0.098,
+      "bytes": 140,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "send_http_request_from_history",
+      "args": {
+       "index": 122,
+       "replaceHeaders": {
+        "Cookie": "role=admin"
+       }
+      },
+      "wall": 68.783,
+      "bytes": 801,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "filtered 401 -> send_http_request_from_history{replaceHeaders}",
+    "answer": "add Authorization: 401->200; Cookie role=admin: 403->200",
+    "correct": true,
+    "notes": "replaceHeaders adds missing headers; replay gated per host (pre-granted for this run) | wall 70.02 s includes ~66 s blocked on the admin.localhost approval click; tool-only 1.234 s",
+    "n_calls": 4,
+    "wall": 1.234,
+    "bytes": 1680,
+    "wall_tool_only": 1.234
+   },
+   "T14": {
+    "id": "T14",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_filtered",
+      "args": {
+       "pathContains": ".png",
+       "count": 1,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index",
+        "path",
+        "responseContentLength",
+        "mimeType"
+       ]
+      },
+      "wall": 0.102,
+      "bytes": 171,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_body",
+      "args": {
+       "index": 51,
+       "message": "response",
+       "offset": 0,
+       "length": 9000
+      },
+      "wall": 0.022,
+      "bytes": 12022,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "filtered{.png} -> body slice 0..9000, latin-1 round trip",
+    "answer": "index=51 bytes=8008 sha256_roundtrip_ok=True",
+    "correct": true,
+    "notes": "",
+    "n_calls": 2,
+    "wall": 0.124,
+    "bytes": 12193
+   },
+   "S1": {
+    "id": "S1",
+    "calls": [
+     {
+      "tool": "get_latest_proxy_http_history",
+      "args": {
+       "count": 1
+      },
+      "wall": 0.025,
+      "bytes": 701,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "get_latest_proxy_http_history{count:1}",
+    "answer": "k=1 newest is final=1",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.025,
+    "bytes": 701
+   },
+   "S2": {
+    "id": "S2",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_filtered",
+      "args": {
+       "host": "admin.localhost",
+       "statusCode": 403,
+       "count": 1,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index"
+       ]
+      },
+      "wall": 0.096,
+      "bytes": 92,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "filtered{host:admin.localhost,statusCode:403,count:1} -> totalMatches",
+    "answer": "totalMatches=554 expected=554",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.096,
+    "bytes": 92
+   },
+   "S3": {
+    "id": "S3",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_count",
+      "args": {
+       "regex": "FLAG\\{needle-7f3a91\\}"
+      },
+      "wall": 0.098,
+      "bytes": 1,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "get_proxy_http_history_count{regex:'FLAG...'}",
+    "answer": "count=1 expected=1",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.098,
+    "bytes": 1
+   },
+   "S4": {
+    "id": "S4",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 500,
+       "offset": 0,
+       "newestFirst": true,
+       "fields": [
+        "host"
+       ]
+      },
+      "wall": 0.029,
+      "bytes": 25917,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 500,
+       "offset": 500,
+       "newestFirst": true,
+       "fields": [
+        "host"
+       ]
+      },
+      "wall": 0.034,
+      "bytes": 25897,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "2 pages of get_proxy_http_history{count:500,newestFirst,fields:[host]}",
+    "answer": "6 hosts from 1000 samples",
+    "correct": true,
+    "notes": "",
+    "n_calls": 2,
+    "wall": 0.063,
+    "bytes": 51814
+   }
+  },
+  "part2": {
+   "k1": {
+    "history": 20001,
+    "rss_mb": 2136,
+    "tasks": {
+     "S1": {
+      "id": "S1",
+      "calls": [
+       {
+        "tool": "get_latest_proxy_http_history",
+        "args": {
+         "count": 1
+        },
+        "wall": 0.025,
+        "bytes": 701,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "get_latest_proxy_http_history{count:1}",
+      "answer": "k=1 newest is final=1",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.025,
+      "bytes": 701
+     },
+     "S2": {
+      "id": "S2",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history_filtered",
+        "args": {
+         "host": "admin.localhost",
+         "statusCode": 403,
+         "count": 1,
+         "offset": 0,
+         "newestFirst": false,
+         "fields": [
+          "index"
+         ]
+        },
+        "wall": 0.096,
+        "bytes": 92,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "filtered{host:admin.localhost,statusCode:403,count:1} -> totalMatches",
+      "answer": "totalMatches=554 expected=554",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.096,
+      "bytes": 92
+     },
+     "S3": {
+      "id": "S3",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history_count",
+        "args": {
+         "regex": "FLAG\\{needle-7f3a91\\}"
+        },
+        "wall": 0.098,
+        "bytes": 1,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "get_proxy_http_history_count{regex:'FLAG...'}",
+      "answer": "count=1 expected=1",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.098,
+      "bytes": 1
+     },
+     "S4": {
+      "id": "S4",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 500,
+         "offset": 0,
+         "newestFirst": true,
+         "fields": [
+          "host"
+         ]
+        },
+        "wall": 0.029,
+        "bytes": 25917,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 500,
+         "offset": 500,
+         "newestFirst": true,
+         "fields": [
+          "host"
+         ]
+        },
+        "wall": 0.034,
+        "bytes": 25897,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "2 pages of get_proxy_http_history{count:500,newestFirst,fields:[host]}",
+      "answer": "6 hosts from 1000 samples",
+      "correct": true,
+      "notes": "",
+      "n_calls": 2,
+      "wall": 0.063,
+      "bytes": 51814
+     }
+    },
+    "note": "S1-S4 measured at 20k on the Part 1 project; T1-T14 are in part1"
+   },
+   "k2": {
+    "history": 40002,
+    "rss_mb": 2228,
+    "tasks": {
+     "S1": {
+      "id": "S1",
+      "calls": [
+       {
+        "tool": "get_latest_proxy_http_history",
+        "args": {
+         "count": 1
+        },
+        "wall": 0.096,
+        "bytes": 701,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "get_latest_proxy_http_history{count:1}",
+      "answer": "k=2 newest is final=1",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.096,
+      "bytes": 701
+     },
+     "S2": {
+      "id": "S2",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history_filtered",
+        "args": {
+         "host": "admin.localhost",
+         "statusCode": 403,
+         "count": 1,
+         "offset": 0,
+         "newestFirst": false,
+         "fields": [
+          "index"
+         ]
+        },
+        "wall": 0.371,
+        "bytes": 93,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "filtered{host:admin.localhost,statusCode:403,count:1} -> totalMatches",
+      "answer": "totalMatches=1108 expected=1108",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.371,
+      "bytes": 93
+     },
+     "S3": {
+      "id": "S3",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history_count",
+        "args": {
+         "regex": "FLAG\\{needle-7f3a91\\}"
+        },
+        "wall": 0.253,
+        "bytes": 1,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "get_proxy_http_history_count{regex:'FLAG...'}",
+      "answer": "count=2 expected=2",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.253,
+      "bytes": 1
+     },
+     "S4": {
+      "id": "S4",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 500,
+         "offset": 0,
+         "newestFirst": true,
+         "fields": [
+          "host"
+         ]
+        },
+        "wall": 0.06,
+        "bytes": 25918,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 500,
+         "offset": 500,
+         "newestFirst": true,
+         "fields": [
+          "host"
+         ]
+        },
+        "wall": 0.053,
+        "bytes": 25895,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "2 pages of get_proxy_http_history{count:500,newestFirst,fields:[host]}",
+      "answer": "6 hosts from 1000 samples",
+      "correct": true,
+      "notes": "",
+      "n_calls": 2,
+      "wall": 0.113,
+      "bytes": 51813
+     }
+    }
+   },
+   "k3": {
+    "history": 60003,
+    "rss_mb": 3866,
+    "tasks": {
+     "S1": {
+      "id": "S1",
+      "calls": [
+       {
+        "tool": "get_latest_proxy_http_history",
+        "args": {
+         "count": 1
+        },
+        "wall": 0.061,
+        "bytes": 701,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "get_latest_proxy_http_history{count:1}",
+      "answer": "k=3 newest is final=1",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.061,
+      "bytes": 701
+     },
+     "S2": {
+      "id": "S2",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history_filtered",
+        "args": {
+         "host": "admin.localhost",
+         "statusCode": 403,
+         "count": 1,
+         "offset": 0,
+         "newestFirst": false,
+         "fields": [
+          "index"
+         ]
+        },
+        "wall": 0.315,
+        "bytes": 93,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "filtered{host:admin.localhost,statusCode:403,count:1} -> totalMatches",
+      "answer": "totalMatches=1662 expected=1662",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.315,
+      "bytes": 93
+     },
+     "S3": {
+      "id": "S3",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history_count",
+        "args": {
+         "regex": "FLAG\\{needle-7f3a91\\}"
+        },
+        "wall": 0.298,
+        "bytes": 1,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "get_proxy_http_history_count{regex:'FLAG...'}",
+      "answer": "count=3 expected=3",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.298,
+      "bytes": 1
+     },
+     "S4": {
+      "id": "S4",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 500,
+         "offset": 0,
+         "newestFirst": true,
+         "fields": [
+          "host"
+         ]
+        },
+        "wall": 0.054,
+        "bytes": 25918,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 500,
+         "offset": 500,
+         "newestFirst": true,
+         "fields": [
+          "host"
+         ]
+        },
+        "wall": 0.06,
+        "bytes": 25895,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "2 pages of get_proxy_http_history{count:500,newestFirst,fields:[host]}",
+      "answer": "6 hosts from 1000 samples",
+      "correct": true,
+      "notes": "",
+      "n_calls": 2,
+      "wall": 0.114,
+      "bytes": 51813
+     }
+    }
+   },
+   "k4": {
+    "history": 80004,
+    "rss_mb": 3963,
+    "tasks": {
+     "S1": {
+      "id": "S1",
+      "calls": [
+       {
+        "tool": "get_latest_proxy_http_history",
+        "args": {
+         "count": 1
+        },
+        "wall": 0.066,
+        "bytes": 701,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "get_latest_proxy_http_history{count:1}",
+      "answer": "k=4 newest is final=1",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.066,
+      "bytes": 701
+     },
+     "S2": {
+      "id": "S2",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history_filtered",
+        "args": {
+         "host": "admin.localhost",
+         "statusCode": 403,
+         "count": 1,
+         "offset": 0,
+         "newestFirst": false,
+         "fields": [
+          "index"
+         ]
+        },
+        "wall": 0.402,
+        "bytes": 93,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "filtered{host:admin.localhost,statusCode:403,count:1} -> totalMatches",
+      "answer": "totalMatches=2216 expected=2216",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.402,
+      "bytes": 93
+     },
+     "S3": {
+      "id": "S3",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history_count",
+        "args": {
+         "regex": "FLAG\\{needle-7f3a91\\}"
+        },
+        "wall": 0.417,
+        "bytes": 1,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "get_proxy_http_history_count{regex:'FLAG...'}",
+      "answer": "count=4 expected=4",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.417,
+      "bytes": 1
+     },
+     "S4": {
+      "id": "S4",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 500,
+         "offset": 0,
+         "newestFirst": true,
+         "fields": [
+          "host"
+         ]
+        },
+        "wall": 0.076,
+        "bytes": 25915,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 500,
+         "offset": 500,
+         "newestFirst": true,
+         "fields": [
+          "host"
+         ]
+        },
+        "wall": 0.099,
+        "bytes": 25898,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "2 pages of get_proxy_http_history{count:500,newestFirst,fields:[host]}",
+      "answer": "6 hosts from 1000 samples",
+      "correct": true,
+      "notes": "",
+      "n_calls": 2,
+      "wall": 0.175,
+      "bytes": 51813
+     }
+    }
+   },
+   "k5": {
+    "history": 100005,
+    "rss_mb": 3918,
+    "tasks": {
+     "S1": {
+      "id": "S1",
+      "calls": [
+       {
+        "tool": "get_latest_proxy_http_history",
+        "args": {
+         "count": 1
+        },
+        "wall": 0.106,
+        "bytes": 703,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "get_latest_proxy_http_history{count:1}",
+      "answer": "k=5 newest is final=1",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.106,
+      "bytes": 703
+     },
+     "S2": {
+      "id": "S2",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history_filtered",
+        "args": {
+         "host": "admin.localhost",
+         "statusCode": 403,
+         "count": 1,
+         "offset": 0,
+         "newestFirst": false,
+         "fields": [
+          "index"
+         ]
+        },
+        "wall": 0.596,
+        "bytes": 93,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "filtered{host:admin.localhost,statusCode:403,count:1} -> totalMatches",
+      "answer": "totalMatches=2770 expected=2770",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.596,
+      "bytes": 93
+     },
+     "S3": {
+      "id": "S3",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history_count",
+        "args": {
+         "regex": "FLAG\\{needle-7f3a91\\}"
+        },
+        "wall": 0.59,
+        "bytes": 1,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "get_proxy_http_history_count{regex:'FLAG...'}",
+      "answer": "count=5 expected=5",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.59,
+      "bytes": 1
+     },
+     "S4": {
+      "id": "S4",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 500,
+         "offset": 0,
+         "newestFirst": true,
+         "fields": [
+          "host"
+         ]
+        },
+        "wall": 0.101,
+        "bytes": 25928,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 500,
+         "offset": 500,
+         "newestFirst": true,
+         "fields": [
+          "host"
+         ]
+        },
+        "wall": 0.107,
+        "bytes": 25899,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "2 pages of get_proxy_http_history{count:500,newestFirst,fields:[host]}",
+      "answer": "6 hosts from 1000 samples",
+      "correct": true,
+      "notes": "",
+      "n_calls": 2,
+      "wall": 0.208,
+      "bytes": 51827
+     }
+    }
+   }
+  },
+  "part3": {
+   "tool_count": 42,
+   "toolslist_result_bytes": 15922,
+   "tools_list_jsonrpc_bytes": 15961
+  },
+  "part4": {
+   "A1": {
+    "runs": [
+     {
+      "correct": true,
+      "wall_s": 6.0,
+      "turns": 3,
+      "tool_calls": 2,
+      "tool_output_bytes": 701,
+      "cost_usd": 0.0271209,
+      "input_tokens": 6,
+      "output_tokens": 232,
+      "cache_read_input_tokens": 42049,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": true,
+      "wall_s": 5.9,
+      "turns": 3,
+      "tool_calls": 2,
+      "tool_output_bytes": 701,
+      "cost_usd": 0.0274209,
+      "input_tokens": 6,
+      "output_tokens": 262,
+      "cache_read_input_tokens": 42049,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": true,
+      "wall_s": 6.0,
+      "turns": 3,
+      "tool_calls": 2,
+      "tool_output_bytes": 701,
+      "cost_usd": 0.0271167,
+      "input_tokens": 6,
+      "output_tokens": 232,
+      "cache_read_input_tokens": 42047,
+      "timed_out": false,
+      "subtype": "success"
+     }
+    ],
+    "median": {
+     "wall_s": 6.0,
+     "turns": 3,
+     "tool_calls": 2,
+     "tool_output_bytes": 701,
+     "cost_usd": 0.027,
+     "input_tokens": 6,
+     "output_tokens": 232
+    },
+    "correct_runs": 3,
+    "n_runs": 3,
+    "answers": [
+     "The most recent request in the proxy history (item #20001) is:\n\n**GET http://api.localhost:18080/api/v1/health?final=1**\n\nIt returned a 200 response.",
+     "The most recent request in the proxy history (item #20001) is:\n\n**GET http://api.localhost:18080/api/v1/health?final=1**\n\nIt returned HTTP 200 and was logged at 2026-10-31 19:45:29 (Europe/Brussels).",
+     "The most recent request in the proxy history (index 20001) is:\n\n**GET http://api.localhost:18080/api/v1/health?final=1**\n\nIt returned a 200 response."
+    ]
+   },
+   "A2": {
+    "runs": [
+     {
+      "correct": true,
+      "wall_s": 6.6,
+      "turns": 3,
+      "tool_calls": 2,
+      "tool_output_bytes": 92,
+      "cost_usd": 0.0306004,
+      "input_tokens": 6,
+      "output_tokens": 457,
+      "cache_read_input_tokens": 42544,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": true,
+      "wall_s": 11.1,
+      "turns": 3,
+      "tool_calls": 2,
+      "tool_output_bytes": 92,
+      "cost_usd": 0.0307404,
+      "input_tokens": 6,
+      "output_tokens": 471,
+      "cache_read_input_tokens": 42544,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": true,
+      "wall_s": 7.8,
+      "turns": 3,
+      "tool_calls": 2,
+      "tool_output_bytes": 96,
+      "cost_usd": 0.0307977,
+      "input_tokens": 6,
+      "output_tokens": 478,
+      "cache_read_input_tokens": 42537,
+      "timed_out": false,
+      "subtype": "success"
+     }
+    ],
+    "median": {
+     "wall_s": 7.8,
+     "turns": 3,
+     "tool_calls": 2,
+     "tool_output_bytes": 92,
+     "cost_usd": 0.031,
+     "input_tokens": 6,
+     "output_tokens": 471
+    },
+    "correct_runs": 3,
+    "n_runs": 3,
+    "answers": [
+     "**554** requests to admin.localhost received a 403 response. This is the `totalMatches` count from Burp's proxy history filter on host `admin.localhost` with status code 403. I didn't check the individual items.",
+     "554 requests to admin.localhost received a 403 response. That is the `totalMatches` value from the Burp proxy history, filtered on host `admin.localhost` and status code 403.\n\nThe filter accepts the host with or without a port, so requests to any port on that host are included in the count.",
+     "554 requests to admin.localhost received a 403 response. That is the `totalMatches` count from Burp's proxy history filter, set to host `admin.localhost` and status code 403.\n\nThe filter accepts the host with or without a port, so requests to `admin.localhost` on any port are in that total. I didn't check the individual entries."
+    ]
+   },
+   "A3": {
+    "runs": [
+     {
+      "correct": true,
+      "wall_s": 87.3,
+      "turns": 33,
+      "tool_calls": 31,
+      "tool_output_bytes": 185632,
+      "cost_usd": 0.7219928999999999,
+      "input_tokens": 54,
+      "output_tokens": 5679,
+      "cache_read_input_tokens": 1019201,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": true,
+      "wall_s": 22.9,
+      "turns": 8,
+      "tool_calls": 6,
+      "tool_output_bytes": 1456,
+      "cost_usd": 0.1220205,
+      "input_tokens": 16,
+      "output_tokens": 1356,
+      "cache_read_input_tokens": 119249,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": true,
+      "wall_s": 62.8,
+      "turns": 21,
+      "tool_calls": 19,
+      "tool_output_bytes": 189022,
+      "cost_usd": 0.5726381,
+      "input_tokens": 28,
+      "output_tokens": 4461,
+      "cache_read_input_tokens": 298227,
+      "timed_out": false,
+      "subtype": "success"
+     }
+    ],
+    "median": {
+     "wall_s": 62.8,
+     "turns": 21,
+     "tool_calls": 19,
+     "tool_output_bytes": 185632,
+     "cost_usd": 0.573,
+     "input_tokens": 28,
+     "output_tokens": 4461
+    },
+    "correct_runs": 3,
+    "n_runs": 3,
+    "answers": [
+     "Found it.\n\n```\nvar awsKey=\"AKIAQ3EXAMPLEKEY7777\";\n```\n\n**AWS access key:** `AKIAQ3EXAMPLEKEY7777`\n**File URL:** `http://static.localhost:18080/assets/vendor.3c9e.js`",
+     "Found it.\n\n- **AWS Access Key:** `AKIAQ3EXAMPLEKEY7777`\n- **File URL:** `http://static.localhost:18080/assets/vendor.3c9e.js`\n\nIt appears in the proxy history at index 4103 (and again identically at index 16023, same file re-requested).",
+     "Found it. The embedded key line reads:\n\n```\nvar awsKey=\"AKIAQ3EXAMPLEKEY7777\";\n```\n\n**AWS Access Key:** `AKIAQ3EXAMPLEKEY7777`\n**File URL:** `http://static.localhost:18080/assets/vendor.3c9e.js`\n\nIt's buried inside a large obfuscated/filler JS bundle (thousands of junk `var aN=\"lorem ipsum...\"` lines) at roughly offset 158,2xx of the response body, assigned to a variable named `awsKey`."
+    ]
+   },
+   "A4": {
+    "runs": [
+     {
+      "correct": true,
+      "wall_s": 15.4,
+      "turns": 4,
+      "tool_calls": 2,
+      "tool_output_bytes": 3259,
+      "cost_usd": 0.0842362,
+      "input_tokens": 6,
+      "output_tokens": 985,
+      "cache_read_input_tokens": 32767,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": true,
+      "wall_s": 26.4,
+      "turns": 6,
+      "tool_calls": 4,
+      "tool_output_bytes": 9710,
+      "cost_usd": 0.1171237,
+      "input_tokens": 8,
+      "output_tokens": 1687,
+      "cache_read_input_tokens": 52244,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": true,
+      "wall_s": 12.3,
+      "turns": 4,
+      "tool_calls": 2,
+      "tool_output_bytes": 3259,
+      "cost_usd": 0.0806082,
+      "input_tokens": 6,
+      "output_tokens": 661,
+      "cache_read_input_tokens": 32767,
+      "timed_out": false,
+      "subtype": "success"
+     }
+    ],
+    "median": {
+     "wall_s": 15.4,
+     "turns": 4,
+     "tool_calls": 2,
+     "tool_output_bytes": 3259,
+     "cost_usd": 0.084,
+     "input_tokens": 6,
+     "output_tokens": 985
+    },
+    "correct_runs": 3,
+    "n_runs": 3,
+    "answers": [
+     "Based on the proxy history, three distinct endpoints repeatedly carry URL-valued parameters and are strong SSRF/open-redirect candidates:\n\n| Endpoint path | Parameter | Likely issue | Evidence |\n|---|---|---|---|\n| `shop.localhost/fetch` | `url` | **SSRF** \u2014 value points to `http://169.254.169.254/latest/meta-data/` (cloud metadata endpoint), classic SSRF-to-credential-theft pattern | e.g. request",
+     "No additional form-based or JSON-body URL parameters turned up beyond what's already identified. Final answer:\n\n## SSRF / Open-Redirect candidates found in proxy history\n\n| Endpoint path | Host | Parameter | Observed value in traffic | Risk type |\n|---|---|---|---|---|\n| `/fetch` | shop.localhost:18080 | `url` | `http://169.254.169.254/latest/meta-data/` | **SSRF** \u2014 server-side fetch of attacker-",
+     "Found 3 distinct endpoints repeating across the traffic, each a strong SSRF/open-redirect candidate:\n\n| Endpoint path | Parameter | Likely issue |\n|---|---|---|\n| `GET /fetch` (shop.localhost) | `url` | SSRF \u2014 observed probing cloud metadata (`169.254.169.254/latest/meta-data/`), confirming the backend fetches attacker-controlled URLs |\n| `GET /api/v1/webhooks` (api.localhost) | `callback` | SSRF "
+    ]
+   },
+   "A6": {
+    "runs": [
+     {
+      "correct": true,
+      "wall_s": 17.1,
+      "turns": 11,
+      "tool_calls": 10,
+      "tool_output_bytes": 9440,
+      "cost_usd": 0.0693705,
+      "input_tokens": 12,
+      "output_tokens": 1559,
+      "cache_read_input_tokens": 95205,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": true,
+      "wall_s": 28.3,
+      "turns": 20,
+      "tool_calls": 19,
+      "tool_output_bytes": 5379,
+      "cost_usd": 0.08741890000000002,
+      "input_tokens": 20,
+      "output_tokens": 2764,
+      "cache_read_input_tokens": 171469,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": true,
+      "wall_s": 33.6,
+      "turns": 18,
+      "tool_calls": 17,
+      "tool_output_bytes": 15256,
+      "cost_usd": 0.108686,
+      "input_tokens": 22,
+      "output_tokens": 2421,
+      "cache_read_input_tokens": 202200,
+      "timed_out": false,
+      "subtype": "success"
+     }
+    ],
+    "median": {
+     "wall_s": 28.3,
+     "turns": 18,
+     "tool_calls": 17,
+     "tool_output_bytes": 9440,
+     "cost_usd": 0.087,
+     "input_tokens": 20,
+     "output_tokens": 2421
+    },
+    "correct_runs": 3,
+    "n_runs": 3,
+    "answers": [
+     "I counted requests per host using a regex on the `Host` header. The six counts add up to 20,001, which is the total history size, so no other hosts are missing.\n\n| Host | Requests |\n|---|---|\n| shop.localhost | 9,227 |\n| api.localhost | 7,875 |\n| static.localhost | 1,483 |\n| admin.localhost | 776 |\n| auth.localhost | 413 |\n| graphql.localhost | 227 |\n| **Total** | **20,001** |\n\nI found the host na",
+     "The proxy history has 20,001 requests across 6 hosts. All of them are on port 18080.\n\n| Host | Requests |\n|---|---|\n| shop.localhost | 9,227 |\n| api.localhost | 7,875 |\n| static.localhost | 1,483 |\n| admin.localhost | 776 |\n| auth.localhost | 413 |\n| graphql.localhost | 227 |\n| **Total** | **20,001** |\n\nI didn't read all 20,001 entries. I counted by regex on each request's `Host:` header, and the ",
+     "The proxy history has 20,001 requests across 6 hosts:\n\n| Host | Requests |\n|---|---|\n| shop.localhost | 9,227 |\n| api.localhost | 7,875 |\n| static.localhost | 1,483 |\n| admin.localhost | 776 |\n| auth.localhost | 413 |\n| graphql.localhost | 227 |\n| **Total** | **20,001** |\n\nThe six counts add up to the history total of 20,001. A check for any other `Host:` value returned 0, so no other hosts are in"
+    ]
+   },
+   "A5": {
+    "runs": [
+     {
+      "correct": true,
+      "wall_s": 17.8,
+      "turns": 6,
+      "tool_calls": 4,
+      "tool_output_bytes": 1600,
+      "cost_usd": 0.11079340000000001,
+      "input_tokens": 12,
+      "output_tokens": 851,
+      "cache_read_input_tokens": 84997,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": true,
+      "wall_s": 17.6,
+      "turns": 6,
+      "tool_calls": 4,
+      "tool_output_bytes": 1600,
+      "cost_usd": 0.11245200000000002,
+      "input_tokens": 12,
+      "output_tokens": 898,
+      "cache_read_input_tokens": 85740,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": true,
+      "wall_s": 15.1,
+      "turns": 5,
+      "tool_calls": 3,
+      "tool_output_bytes": 1600,
+      "cost_usd": 0.10347359999999999,
+      "input_tokens": 10,
+      "output_tokens": 668,
+      "cache_read_input_tokens": 66808,
+      "timed_out": false,
+      "subtype": "success"
+     }
+    ],
+    "median": {
+     "wall_s": 17.6,
+     "turns": 6,
+     "tool_calls": 4,
+     "tool_output_bytes": 1600,
+     "cost_usd": 0.111,
+     "input_tokens": 12,
+     "output_tokens": 851
+    },
+    "correct_runs": 3,
+    "n_runs": 3,
+    "answers": [
+     "The resent request without the `Authorization` header returned:\n\n**HTTP 401 Unauthorized** \u2014 `{\"error\": \"missing bearer token\"}`\n\nSo the endpoint correctly enforces authentication when the Authorization header is stripped; no auth bypass here.",
+     "The resent request (identical to the captured one, minus the `Authorization` header) returned:\n\n**HTTP 401 Unauthorized**\n\nResponse body: `{\"error\": \"missing bearer token\"}` \u2014 so the endpoint correctly rejects unauthenticated access when the header is stripped.",
+     "The resent GET request to `/api/v1/users/7777` without the Authorization header returned:\n\n**HTTP 401 Unauthorized** (`{\"error\": \"missing bearer token\"}`)\n\nThis confirms the endpoint properly enforces authentication when the Authorization header is absent \u2014 no unauthorized access via removal of that header."
+    ]
+   },
+   "__total__": {
+    "cost_usd": 2.465,
+    "runs": 18,
+    "correct_runs": 18
+   }
+  }
+ },
+ "burp-official": {
+  "meta": {
+   "jar": "/tmp/burp-official-src/build/libs/burp-mcp-all.jar",
+   "sha256": "de97e9698310910650ea6b90c761af813534f95a614d6fda4cf3c5434a9ccaee",
+   "manifest_version": "1.3.0",
+   "serverInfo": {
+    "name": "burp-suite",
+    "version": "1.1.2"
+   },
+   "built": "PortSwigger/mcp-server tag v1.3.0 @5f76126, ./gradlew embedProxyJar, JDK 21.0.11",
+   "project": "/tmp/burp-bench/official.burp",
+   "approvals": "pre-granted: 'Always Allow HTTP history' + 'Always Allow Host' for the 6 *.localhost vhosts",
+   "corpus_k1_seconds": 20.0
+  },
+  "part1": {
+   "T1": {
+    "id": "T1",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 0
+      },
+      "wall": 0.019,
+      "bytes": 569,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 1
+      },
+      "wall": 0.022,
+      "bytes": 673,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 2
+      },
+      "wall": 0.02,
+      "bytes": 569,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 4
+      },
+      "wall": 0.02,
+      "bytes": 673,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 8
+      },
+      "wall": 0.02,
+      "bytes": 1802,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 16
+      },
+      "wall": 0.02,
+      "bytes": 980,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 32
+      },
+      "wall": 0.021,
+      "bytes": 744,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 64
+      },
+      "wall": 0.022,
+      "bytes": 1298,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 128
+      },
+      "wall": 0.022,
+      "bytes": 972,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 256
+      },
+      "wall": 0.023,
+      "bytes": 1310,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 512
+      },
+      "wall": 0.04,
+      "bytes": 673,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 1024
+      },
+      "wall": 0.037,
+      "bytes": 1534,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 2048
+      },
+      "wall": 0.051,
+      "bytes": 1052,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 4096
+      },
+      "wall": 0.067,
+      "bytes": 1283,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 8192
+      },
+      "wall": 0.099,
+      "bytes": 1529,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 16384
+      },
+      "wall": 0.177,
+      "bytes": 980,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 32768
+      },
+      "wall": 0.219,
+      "bytes": 20,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 24576
+      },
+      "wall": 0.21,
+      "bytes": 20,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 20480
+      },
+      "wall": 0.212,
+      "bytes": 20,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 18432
+      },
+      "wall": 0.202,
+      "bytes": 990,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 19456
+      },
+      "wall": 0.208,
+      "bytes": 1271,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 19968
+      },
+      "wall": 0.214,
+      "bytes": 528,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 20224
+      },
+      "wall": 0.235,
+      "bytes": 20,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 20096
+      },
+      "wall": 0.218,
+      "bytes": 20,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 20032
+      },
+      "wall": 0.215,
+      "bytes": 20,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 20000
+      },
+      "wall": 0.228,
+      "bytes": 393,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 20016
+      },
+      "wall": 0.213,
+      "bytes": 20,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 20008
+      },
+      "wall": 0.212,
+      "bytes": 20,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 20004
+      },
+      "wall": 0.225,
+      "bytes": 20,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 20002
+      },
+      "wall": 0.216,
+      "bytes": 20,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 20001
+      },
+      "wall": 0.214,
+      "bytes": 20,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "no newest-first: exponential+binary search on offset with count=1, then keep the last valid item",
+    "answer": "newest at offset 20000 (history has 20001 items)",
+    "correct": true,
+    "notes": "~2*log2(N)+1 calls",
+    "n_calls": 31,
+    "wall": 3.921,
+    "bytes": 20043
+   },
+   "T2": {
+    "id": "T2",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "FLAG\\{needle-7f3a91\\}",
+       "count": 100,
+       "offset": 0
+      },
+      "wall": 0.097,
+      "bytes": 1014,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "get_proxy_http_history_regex{regex:'FLAG\\\\{needle-7f3a91\\\\}',count:100,offset:0}",
+    "answer": "1 item /api/v1/users/7777",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.097,
+    "bytes": 1014
+   },
+   "T3": {
+    "id": "T3",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "AKIAQ3EXAMPLEKEY7777",
+       "count": 100,
+       "offset": 0
+      },
+      "wall": 0.09,
+      "bytes": 10032,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "get_proxy_http_history_regex{regex:'AKIAQ3EXAMPLEKEY7777'}; items truncated at 5,000 chars",
+    "answer": "2 matching item(s); file URL visible=True; key text visible=False",
+    "correct": false,
+    "notes": "the regex proves the file, but the 5,000-char item cap hides the key itself -> task not fully answerable",
+    "n_calls": 1,
+    "wall": 0.09,
+    "bytes": 10032
+   },
+   "T4": {
+    "id": "T4",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "X-Debug-Token: dbg-41c2",
+       "count": 100,
+       "offset": 0
+      },
+      "wall": 0.091,
+      "bytes": 1273,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "get_proxy_http_history_regex{regex:'X-Debug-Token: dbg-41c2'}",
+    "answer": "1 item shop /product/1",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.091,
+    "bytes": 1273
+   },
+   "T5": {
+    "id": "T5",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "^HTTP/1.1 403",
+       "count": 500,
+       "offset": 0
+      },
+      "wall": 0.089,
+      "bytes": 243463,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "^HTTP/1.1 403",
+       "count": 500,
+       "offset": 500
+      },
+      "wall": 0.087,
+      "bytes": 26286,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "no count/filter: page get_proxy_http_history_regex{regex:'^HTTP/1.1 403'} in 500-item pages and count",
+    "answer": "554 matches (expected 554) in 2 pages of 500",
+    "correct": true,
+    "notes": "",
+    "n_calls": 2,
+    "wall": 0.176,
+    "bytes": 269749
+   },
+   "T6": {
+    "id": "T6",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "<svg/onload=omp",
+       "count": 100,
+       "offset": 0
+      },
+      "wall": 0.102,
+      "bytes": 3985,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "get_proxy_http_history_regex{regex:'<svg/onload=omp'}",
+    "answer": "5 (expected 5)",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.102,
+    "bytes": 3985
+   },
+   "T7": {
+    "id": "T7",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "(url=|callback=|redirect_uri=)",
+       "count": 100,
+       "offset": 0
+      },
+      "wall": 0.561,
+      "bytes": 13387,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "get_proxy_http_history_regex{regex:'(url=|callback=|redirect_uri=)'}",
+    "answer": "25 (expected 25)",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.561,
+    "bytes": 13387
+   },
+   "T8": {
+    "id": "T8",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "Traceback",
+       "count": 500,
+       "offset": 0
+      },
+      "wall": 0.104,
+      "bytes": 28596,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "NullPointerException",
+       "count": 500,
+       "offset": 0
+      },
+      "wall": 0.095,
+      "bytes": 25263,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "2x get_proxy_http_history_regex count by paging",
+    "answer": "Traceback=42 NPE=52",
+    "correct": true,
+    "notes": "",
+    "n_calls": 2,
+    "wall": 0.199,
+    "bytes": 53859
+   },
+   "T9": {
+    "id": "T9",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 500,
+       "offset": 0
+      },
+      "wall": 0.037,
+      "bytes": 668573,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "no sitemap/no fields: page history 500 items at a time and parse 'Host:'",
+    "answer": "6 hosts after 1 page(s): ['admin.localhost:18080', 'api.localhost:18080', 'auth.localhost:18080', 'graphql.localhost:18080', 'shop.localhost:18080', 'static.localhost:18080']",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.037,
+    "bytes": 668573
+   },
+   "T10": {
+    "id": "T10",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "/big/report.json",
+       "count": 5,
+       "offset": 0
+      },
+      "wall": 0.111,
+      "bytes": 15049,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "no slicing tool: regex for the path, then read the item (5,000-char per-item cap)",
+    "answer": "3 matching item(s), 15049 chars returned, item JSON cut mid-string",
+    "correct": false,
+    "notes": "only the first ~4.7 KB of a 1.30 MB body is reachable; bytes 600000-602000 are unreachable: infeasible",
+    "n_calls": 1,
+    "wall": 0.111,
+    "bytes": 15049
+   },
+   "T11": {
+    "id": "T11",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "POST /api/v1/orders",
+       "count": 500,
+       "offset": 0
+      },
+      "wall": 0.108,
+      "bytes": 337116,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "POST /api/v1/orders",
+       "count": 500,
+       "offset": 500
+      },
+      "wall": 0.097,
+      "bytes": 66069,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "page get_proxy_http_history_regex{regex:'POST /api/v1/orders'} and count",
+    "answer": "598 (expected 598) in 2 pages",
+    "correct": true,
+    "notes": "",
+    "n_calls": 2,
+    "wall": 0.205,
+    "bytes": 403185
+   },
+   "T12": {
+    "id": "T12",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "user\\d+@example\\.test",
+       "count": 500,
+       "offset": 0
+      },
+      "wall": 0.138,
+      "bytes": 490427,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "user\\d+@example\\.test",
+       "count": 500,
+       "offset": 500
+      },
+      "wall": 0.141,
+      "bytes": 488102,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "user\\d+@example\\.test",
+       "count": 500,
+       "offset": 1000
+      },
+      "wall": 0.143,
+      "bytes": 488205,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "user\\d+@example\\.test",
+       "count": 500,
+       "offset": 1500
+      },
+      "wall": 0.148,
+      "bytes": 490275,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "user\\d+@example\\.test",
+       "count": 500,
+       "offset": 2000
+      },
+      "wall": 0.152,
+      "bytes": 488408,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "user\\d+@example\\.test",
+       "count": 500,
+       "offset": 2500
+      },
+      "wall": 0.151,
+      "bytes": 488413,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "user\\d+@example\\.test",
+       "count": 500,
+       "offset": 3000
+      },
+      "wall": 0.153,
+      "bytes": 490134,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "user\\d+@example\\.test",
+       "count": 500,
+       "offset": 3500
+      },
+      "wall": 0.163,
+      "bytes": 489467,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "user\\d+@example\\.test",
+       "count": 500,
+       "offset": 4000
+      },
+      "wall": 0.157,
+      "bytes": 490140,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "user\\d+@example\\.test",
+       "count": 500,
+       "offset": 4500
+      },
+      "wall": 0.161,
+      "bytes": 488949,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "user\\d+@example\\.test",
+       "count": 500,
+       "offset": 5000
+      },
+      "wall": 0.155,
+      "bytes": 206172,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "page get_proxy_http_history_regex{regex:'user\\\\d+@example\\\\.test'} and count items",
+    "answer": "5211 items in 11 pages of 500",
+    "correct": true,
+    "notes": "no count primitive: 5,211 matches must be paged out to be counted",
+    "n_calls": 11,
+    "wall": 1.662,
+    "bytes": 5098692
+   },
+   "T13": {
+    "id": "T13",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "GET /api/v1/users/",
+       "count": 3,
+       "offset": 0
+      },
+      "wall": 0.097,
+      "bytes": 2878,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "send_http1_request",
+      "args": {
+       "content": "GET /api/v1/users/2715 HTTP/1.1\nHost: api.localhost:18080\nAccept-Encoding: gzip, deflate, br\nUser-Agent: burp-official-r...",
+       "targetHostname": "api.localhost",
+       "targetPort": 18080,
+       "usesHttps": false
+      },
+      "wall": 1.006,
+      "bytes": 981,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "regex to fetch the raw request, edit a header, send_http1_request",
+    "answer": "replayed with edited User-Agent -> 200",
+    "correct": true,
+    "notes": "",
+    "n_calls": 2,
+    "wall": 1.103,
+    "bytes": 3859
+   },
+   "T14": {
+    "id": "T14",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "\\.png",
+       "count": 5,
+       "offset": 0
+      },
+      "wall": 0.135,
+      "bytes": 32500,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "regex for the .png item, read its bytes (5,000-char per-item cap)",
+    "answer": "5 matching item(s); response prefix recoverable=5005 chars of an 8,008-byte PNG",
+    "correct": false,
+    "notes": "binary body cannot be recovered: per-item 5,000-char cap, no byte/slice tool",
+    "n_calls": 1,
+    "wall": 0.135,
+    "bytes": 32500
+   },
+   "S1": {
+    "id": "S1",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 0
+      },
+      "wall": 0.017,
+      "bytes": 569,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 1
+      },
+      "wall": 0.016,
+      "bytes": 673,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 2
+      },
+      "wall": 0.016,
+      "bytes": 569,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 4
+      },
+      "wall": 0.02,
+      "bytes": 673,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 8
+      },
+      "wall": 0.015,
+      "bytes": 1802,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 16
+      },
+      "wall": 0.016,
+      "bytes": 980,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 32
+      },
+      "wall": 0.017,
+      "bytes": 744,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 64
+      },
+      "wall": 0.016,
+      "bytes": 1298,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 128
+      },
+      "wall": 0.017,
+      "bytes": 972,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 256
+      },
+      "wall": 0.017,
+      "bytes": 1310,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 512
+      },
+      "wall": 0.029,
+      "bytes": 673,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 1024
+      },
+      "wall": 0.037,
+      "bytes": 1534,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 2048
+      },
+      "wall": 0.039,
+      "bytes": 1052,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 4096
+      },
+      "wall": 0.058,
+      "bytes": 1283,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 8192
+      },
+      "wall": 0.101,
+      "bytes": 1529,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 16384
+      },
+      "wall": 0.193,
+      "bytes": 980,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 32768
+      },
+      "wall": 0.215,
+      "bytes": 20,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 24576
+      },
+      "wall": 0.227,
+      "bytes": 20,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 20480
+      },
+      "wall": 0.221,
+      "bytes": 20,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 18432
+      },
+      "wall": 0.199,
+      "bytes": 990,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 19456
+      },
+      "wall": 0.224,
+      "bytes": 1271,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 19968
+      },
+      "wall": 0.22,
+      "bytes": 528,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 20224
+      },
+      "wall": 0.214,
+      "bytes": 20,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 20096
+      },
+      "wall": 0.215,
+      "bytes": 20,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 20032
+      },
+      "wall": 0.218,
+      "bytes": 20,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 20000
+      },
+      "wall": 0.215,
+      "bytes": 393,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 20016
+      },
+      "wall": 0.223,
+      "bytes": 20,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 20008
+      },
+      "wall": 0.221,
+      "bytes": 20,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 20004
+      },
+      "wall": 0.216,
+      "bytes": 20,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 20002
+      },
+      "wall": 0.212,
+      "bytes": 20,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 1,
+       "offset": 20001
+      },
+      "wall": 0.213,
+      "bytes": 20,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "exponential+binary offset search, count=1 pages",
+    "answer": "newest at offset 20000 (history 20001)",
+    "correct": true,
+    "notes": "",
+    "n_calls": 31,
+    "wall": 3.877,
+    "bytes": 20043
+   },
+   "S2": {
+    "id": "S2",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "^HTTP/1.1 403",
+       "count": 500,
+       "offset": 0
+      },
+      "wall": 0.09,
+      "bytes": 243463,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "^HTTP/1.1 403",
+       "count": 500,
+       "offset": 500
+      },
+      "wall": 0.087,
+      "bytes": 26286,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "page get_proxy_http_history_regex{regex:'^HTTP/1.1 403'} and count",
+    "answer": "554 matches expected 554 in 2 pages of 500",
+    "correct": true,
+    "notes": "",
+    "n_calls": 2,
+    "wall": 0.177,
+    "bytes": 269749
+   },
+   "S3": {
+    "id": "S3",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "FLAG\\{needle-7f3a91\\}",
+       "count": 500,
+       "offset": 0
+      },
+      "wall": 0.093,
+      "bytes": 1014,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "get_proxy_http_history_regex{regex:'FLAG...'} count by paging",
+    "answer": "1 expected 1 in 1 pages",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.093,
+    "bytes": 1014
+   },
+   "S4": {
+    "id": "S4",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 500,
+       "offset": 0
+      },
+      "wall": 0.038,
+      "bytes": 668573,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "page history 500 items at a time, parse 'Host:'",
+    "answer": "6 hosts after 1 page(s)",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.038,
+    "bytes": 668573
+   }
+  },
+  "part2": {
+   "k1": {
+    "history": 20001,
+    "rss_mb": 2501,
+    "tasks": {
+     "S1": {
+      "id": "S1",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 0
+        },
+        "wall": 0.017,
+        "bytes": 569,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 1
+        },
+        "wall": 0.016,
+        "bytes": 673,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 2
+        },
+        "wall": 0.016,
+        "bytes": 569,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 4
+        },
+        "wall": 0.02,
+        "bytes": 673,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 8
+        },
+        "wall": 0.015,
+        "bytes": 1802,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 16
+        },
+        "wall": 0.016,
+        "bytes": 980,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 32
+        },
+        "wall": 0.017,
+        "bytes": 744,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 64
+        },
+        "wall": 0.016,
+        "bytes": 1298,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 128
+        },
+        "wall": 0.017,
+        "bytes": 972,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 256
+        },
+        "wall": 0.017,
+        "bytes": 1310,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 512
+        },
+        "wall": 0.029,
+        "bytes": 673,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 1024
+        },
+        "wall": 0.037,
+        "bytes": 1534,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 2048
+        },
+        "wall": 0.039,
+        "bytes": 1052,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 4096
+        },
+        "wall": 0.058,
+        "bytes": 1283,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 8192
+        },
+        "wall": 0.101,
+        "bytes": 1529,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 16384
+        },
+        "wall": 0.193,
+        "bytes": 980,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 32768
+        },
+        "wall": 0.215,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 24576
+        },
+        "wall": 0.227,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 20480
+        },
+        "wall": 0.221,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 18432
+        },
+        "wall": 0.199,
+        "bytes": 990,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 19456
+        },
+        "wall": 0.224,
+        "bytes": 1271,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 19968
+        },
+        "wall": 0.22,
+        "bytes": 528,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 20224
+        },
+        "wall": 0.214,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 20096
+        },
+        "wall": 0.215,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 20032
+        },
+        "wall": 0.218,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 20000
+        },
+        "wall": 0.215,
+        "bytes": 393,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 20016
+        },
+        "wall": 0.223,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 20008
+        },
+        "wall": 0.221,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 20004
+        },
+        "wall": 0.216,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 20002
+        },
+        "wall": 0.212,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 20001
+        },
+        "wall": 0.213,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "exponential+binary offset search, count=1 pages",
+      "answer": "newest at offset 20000 (history 20001)",
+      "correct": true,
+      "notes": "",
+      "n_calls": 31,
+      "wall": 3.877,
+      "bytes": 20043
+     },
+     "S2": {
+      "id": "S2",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "^HTTP/1.1 403",
+         "count": 500,
+         "offset": 0
+        },
+        "wall": 0.09,
+        "bytes": 243463,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "^HTTP/1.1 403",
+         "count": 500,
+         "offset": 500
+        },
+        "wall": 0.087,
+        "bytes": 26286,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "page get_proxy_http_history_regex{regex:'^HTTP/1.1 403'} and count",
+      "answer": "554 matches expected 554 in 2 pages of 500",
+      "correct": true,
+      "notes": "",
+      "n_calls": 2,
+      "wall": 0.177,
+      "bytes": 269749
+     },
+     "S3": {
+      "id": "S3",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "FLAG\\{needle-7f3a91\\}",
+         "count": 500,
+         "offset": 0
+        },
+        "wall": 0.093,
+        "bytes": 1014,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "get_proxy_http_history_regex{regex:'FLAG...'} count by paging",
+      "answer": "1 expected 1 in 1 pages",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.093,
+      "bytes": 1014
+     },
+     "S4": {
+      "id": "S4",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 500,
+         "offset": 0
+        },
+        "wall": 0.038,
+        "bytes": 668573,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "page history 500 items at a time, parse 'Host:'",
+      "answer": "6 hosts after 1 page(s)",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.038,
+      "bytes": 668573
+     }
+    },
+    "note": "S1-S4 measured at 20k on the Part 1 project; T1-T14 are in part1"
+   },
+   "k2": {
+    "history": 40002,
+    "rss_mb": 2650,
+    "tasks": {
+     "S1": {
+      "id": "S1",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 0
+        },
+        "wall": 0.037,
+        "bytes": 569,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 1
+        },
+        "wall": 0.037,
+        "bytes": 673,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 2
+        },
+        "wall": 0.037,
+        "bytes": 569,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 4
+        },
+        "wall": 0.038,
+        "bytes": 673,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 8
+        },
+        "wall": 0.04,
+        "bytes": 1802,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 16
+        },
+        "wall": 0.045,
+        "bytes": 980,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 32
+        },
+        "wall": 0.038,
+        "bytes": 744,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 64
+        },
+        "wall": 0.035,
+        "bytes": 1298,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 128
+        },
+        "wall": 0.031,
+        "bytes": 972,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 256
+        },
+        "wall": 0.031,
+        "bytes": 1310,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 512
+        },
+        "wall": 0.045,
+        "bytes": 673,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 1024
+        },
+        "wall": 0.049,
+        "bytes": 1534,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 2048
+        },
+        "wall": 0.051,
+        "bytes": 1052,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 4096
+        },
+        "wall": 0.076,
+        "bytes": 1283,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 8192
+        },
+        "wall": 0.114,
+        "bytes": 1529,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 16384
+        },
+        "wall": 0.202,
+        "bytes": 980,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 32768
+        },
+        "wall": 0.353,
+        "bytes": 979,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 65536
+        },
+        "wall": 0.423,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 49152
+        },
+        "wall": 0.424,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 40960
+        },
+        "wall": 0.424,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 36864
+        },
+        "wall": 0.396,
+        "bytes": 1278,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 38912
+        },
+        "wall": 0.415,
+        "bytes": 958,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 39936
+        },
+        "wall": 0.425,
+        "bytes": 5015,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 40448
+        },
+        "wall": 0.423,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 40192
+        },
+        "wall": 0.438,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 40064
+        },
+        "wall": 0.5,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 40000
+        },
+        "wall": 0.456,
+        "bytes": 783,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 40032
+        },
+        "wall": 0.432,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 40016
+        },
+        "wall": 0.44,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 40008
+        },
+        "wall": 0.42,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 40004
+        },
+        "wall": 0.425,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 40002
+        },
+        "wall": 0.43,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 40001
+        },
+        "wall": 0.43,
+        "bytes": 393,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "exponential+binary offset search, count=1 pages",
+      "answer": "newest at offset 40001 (history 40002)",
+      "correct": true,
+      "notes": "",
+      "n_calls": 33,
+      "wall": 8.16,
+      "bytes": 26267
+     },
+     "S2": {
+      "id": "S2",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "^HTTP/1.1 403",
+         "count": 500,
+         "offset": 0
+        },
+        "wall": 0.171,
+        "bytes": 243463,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "^HTTP/1.1 403",
+         "count": 500,
+         "offset": 500
+        },
+        "wall": 0.173,
+        "bytes": 243448,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "^HTTP/1.1 403",
+         "count": 500,
+         "offset": 1000
+        },
+        "wall": 0.175,
+        "bytes": 52589,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "page get_proxy_http_history_regex{regex:'^HTTP/1.1 403'} and count",
+      "answer": "1108 matches expected 1108 in 3 pages of 500",
+      "correct": true,
+      "notes": "",
+      "n_calls": 3,
+      "wall": 0.519,
+      "bytes": 539500
+     },
+     "S3": {
+      "id": "S3",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "FLAG\\{needle-7f3a91\\}",
+         "count": 500,
+         "offset": 0
+        },
+        "wall": 0.181,
+        "bytes": 2030,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "get_proxy_http_history_regex{regex:'FLAG...'} count by paging",
+      "answer": "2 expected 2 in 1 pages",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.181,
+      "bytes": 2030
+     },
+     "S4": {
+      "id": "S4",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 500,
+         "offset": 0
+        },
+        "wall": 0.05,
+        "bytes": 668573,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "page history 500 items at a time, parse 'Host:'",
+      "answer": "6 hosts after 1 page(s)",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.05,
+      "bytes": 668573
+     }
+    }
+   },
+   "k3": {
+    "history": 60003,
+    "rss_mb": 2980,
+    "tasks": {
+     "S1": {
+      "id": "S1",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 0
+        },
+        "wall": 0.053,
+        "bytes": 569,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 1
+        },
+        "wall": 0.047,
+        "bytes": 673,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 2
+        },
+        "wall": 0.054,
+        "bytes": 569,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 4
+        },
+        "wall": 0.043,
+        "bytes": 673,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 8
+        },
+        "wall": 0.046,
+        "bytes": 1802,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 16
+        },
+        "wall": 0.048,
+        "bytes": 980,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 32
+        },
+        "wall": 0.043,
+        "bytes": 744,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 64
+        },
+        "wall": 0.043,
+        "bytes": 1298,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 128
+        },
+        "wall": 0.044,
+        "bytes": 972,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 256
+        },
+        "wall": 0.046,
+        "bytes": 1310,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 512
+        },
+        "wall": 0.052,
+        "bytes": 673,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 1024
+        },
+        "wall": 0.057,
+        "bytes": 1534,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 2048
+        },
+        "wall": 0.068,
+        "bytes": 1052,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 4096
+        },
+        "wall": 0.087,
+        "bytes": 1283,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 8192
+        },
+        "wall": 0.14,
+        "bytes": 1529,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 16384
+        },
+        "wall": 0.209,
+        "bytes": 980,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 32768
+        },
+        "wall": 0.373,
+        "bytes": 979,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 65536
+        },
+        "wall": 0.662,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 49152
+        },
+        "wall": 0.548,
+        "bytes": 1087,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 57344
+        },
+        "wall": 0.629,
+        "bytes": 710,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 61440
+        },
+        "wall": 0.657,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 59392
+        },
+        "wall": 0.66,
+        "bytes": 1279,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 60416
+        },
+        "wall": 0.65,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 59904
+        },
+        "wall": 0.651,
+        "bytes": 1052,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 60160
+        },
+        "wall": 0.662,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 60032
+        },
+        "wall": 0.642,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 59968
+        },
+        "wall": 0.647,
+        "bytes": 5015,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 60000
+        },
+        "wall": 0.66,
+        "bytes": 1281,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 60016
+        },
+        "wall": 0.641,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 60008
+        },
+        "wall": 0.643,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 60004
+        },
+        "wall": 0.659,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 60002
+        },
+        "wall": 0.675,
+        "bytes": 393,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 60003
+        },
+        "wall": 0.647,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "exponential+binary offset search, count=1 pages",
+      "answer": "newest at offset 60002 (history 60003)",
+      "correct": true,
+      "notes": "",
+      "n_calls": 33,
+      "wall": 11.786,
+      "bytes": 28617
+     },
+     "S2": {
+      "id": "S2",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "^HTTP/1.1 403",
+         "count": 500,
+         "offset": 0
+        },
+        "wall": 0.271,
+        "bytes": 243463,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "^HTTP/1.1 403",
+         "count": 500,
+         "offset": 500
+        },
+        "wall": 0.282,
+        "bytes": 243448,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "^HTTP/1.1 403",
+         "count": 500,
+         "offset": 1000
+        },
+        "wall": 0.266,
+        "bytes": 243463,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "^HTTP/1.1 403",
+         "count": 500,
+         "offset": 1500
+        },
+        "wall": 0.257,
+        "bytes": 78877,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "page get_proxy_http_history_regex{regex:'^HTTP/1.1 403'} and count",
+      "answer": "1662 matches expected 1662 in 4 pages of 500",
+      "correct": true,
+      "notes": "",
+      "n_calls": 4,
+      "wall": 1.076,
+      "bytes": 809251
+     },
+     "S3": {
+      "id": "S3",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "FLAG\\{needle-7f3a91\\}",
+         "count": 500,
+         "offset": 0
+        },
+        "wall": 0.274,
+        "bytes": 3046,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "get_proxy_http_history_regex{regex:'FLAG...'} count by paging",
+      "answer": "3 expected 3 in 1 pages",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.274,
+      "bytes": 3046
+     },
+     "S4": {
+      "id": "S4",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 500,
+         "offset": 0
+        },
+        "wall": 0.063,
+        "bytes": 668573,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "page history 500 items at a time, parse 'Host:'",
+      "answer": "6 hosts after 1 page(s)",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.063,
+      "bytes": 668573
+     }
+    }
+   },
+   "k4": {
+    "history": 80004,
+    "rss_mb": 3626,
+    "tasks": {
+     "S1": {
+      "id": "S1",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 0
+        },
+        "wall": 0.072,
+        "bytes": 569,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 1
+        },
+        "wall": 0.083,
+        "bytes": 673,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 2
+        },
+        "wall": 0.062,
+        "bytes": 569,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 4
+        },
+        "wall": 0.055,
+        "bytes": 673,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 8
+        },
+        "wall": 0.058,
+        "bytes": 1802,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 16
+        },
+        "wall": 0.057,
+        "bytes": 980,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 32
+        },
+        "wall": 0.058,
+        "bytes": 744,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 64
+        },
+        "wall": 0.057,
+        "bytes": 1298,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 128
+        },
+        "wall": 0.059,
+        "bytes": 972,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 256
+        },
+        "wall": 0.059,
+        "bytes": 1310,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 512
+        },
+        "wall": 0.064,
+        "bytes": 673,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 1024
+        },
+        "wall": 0.069,
+        "bytes": 1534,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 2048
+        },
+        "wall": 0.089,
+        "bytes": 1052,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 4096
+        },
+        "wall": 0.098,
+        "bytes": 1283,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 8192
+        },
+        "wall": 0.144,
+        "bytes": 1529,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 16384
+        },
+        "wall": 0.24,
+        "bytes": 980,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 32768
+        },
+        "wall": 0.39,
+        "bytes": 979,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 65536
+        },
+        "wall": 0.716,
+        "bytes": 1268,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 131072
+        },
+        "wall": 0.872,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 98304
+        },
+        "wall": 0.857,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 81920
+        },
+        "wall": 0.859,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 73728
+        },
+        "wall": 0.789,
+        "bytes": 1241,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 77824
+        },
+        "wall": 0.845,
+        "bytes": 569,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 79872
+        },
+        "wall": 0.876,
+        "bytes": 1529,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 80896
+        },
+        "wall": 0.877,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 80384
+        },
+        "wall": 0.882,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 80128
+        },
+        "wall": 0.884,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 80000
+        },
+        "wall": 0.871,
+        "bytes": 1235,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 80064
+        },
+        "wall": 0.875,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 80032
+        },
+        "wall": 0.885,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 80016
+        },
+        "wall": 0.851,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 80008
+        },
+        "wall": 0.866,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 80004
+        },
+        "wall": 0.895,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 80002
+        },
+        "wall": 0.851,
+        "bytes": 783,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 80003
+        },
+        "wall": 0.869,
+        "bytes": 393,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "exponential+binary offset search, count=1 pages",
+      "answer": "newest at offset 80003 (history 80004)",
+      "correct": true,
+      "notes": "",
+      "n_calls": 35,
+      "wall": 17.134,
+      "bytes": 24858
+     },
+     "S2": {
+      "id": "S2",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "^HTTP/1.1 403",
+         "count": 500,
+         "offset": 0
+        },
+        "wall": 0.338,
+        "bytes": 243463,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "^HTTP/1.1 403",
+         "count": 500,
+         "offset": 500
+        },
+        "wall": 0.36,
+        "bytes": 243448,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "^HTTP/1.1 403",
+         "count": 500,
+         "offset": 1000
+        },
+        "wall": 0.339,
+        "bytes": 243463,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "^HTTP/1.1 403",
+         "count": 500,
+         "offset": 1500
+        },
+        "wall": 0.356,
+        "bytes": 243448,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "^HTTP/1.1 403",
+         "count": 500,
+         "offset": 2000
+        },
+        "wall": 0.366,
+        "bytes": 105180,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "page get_proxy_http_history_regex{regex:'^HTTP/1.1 403'} and count",
+      "answer": "2216 matches expected 2216 in 5 pages of 500",
+      "correct": true,
+      "notes": "",
+      "n_calls": 5,
+      "wall": 1.759,
+      "bytes": 1079002
+     },
+     "S3": {
+      "id": "S3",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "FLAG\\{needle-7f3a91\\}",
+         "count": 500,
+         "offset": 0
+        },
+        "wall": 0.362,
+        "bytes": 4062,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "get_proxy_http_history_regex{regex:'FLAG...'} count by paging",
+      "answer": "4 expected 4 in 1 pages",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.362,
+      "bytes": 4062
+     },
+     "S4": {
+      "id": "S4",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 500,
+         "offset": 0
+        },
+        "wall": 0.076,
+        "bytes": 668573,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "page history 500 items at a time, parse 'Host:'",
+      "answer": "6 hosts after 1 page(s)",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.076,
+      "bytes": 668573
+     }
+    }
+   },
+   "k5": {
+    "history": 100005,
+    "rss_mb": 4559,
+    "tasks": {
+     "S1": {
+      "id": "S1",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 0
+        },
+        "wall": 0.07,
+        "bytes": 569,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 1
+        },
+        "wall": 0.071,
+        "bytes": 673,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 2
+        },
+        "wall": 0.068,
+        "bytes": 569,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 4
+        },
+        "wall": 0.069,
+        "bytes": 673,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 8
+        },
+        "wall": 0.07,
+        "bytes": 1802,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 16
+        },
+        "wall": 0.069,
+        "bytes": 980,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 32
+        },
+        "wall": 0.07,
+        "bytes": 744,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 64
+        },
+        "wall": 0.069,
+        "bytes": 1298,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 128
+        },
+        "wall": 0.071,
+        "bytes": 972,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 256
+        },
+        "wall": 0.073,
+        "bytes": 1310,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 512
+        },
+        "wall": 0.078,
+        "bytes": 673,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 1024
+        },
+        "wall": 0.087,
+        "bytes": 1534,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 2048
+        },
+        "wall": 0.093,
+        "bytes": 1052,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 4096
+        },
+        "wall": 0.112,
+        "bytes": 1283,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 8192
+        },
+        "wall": 0.175,
+        "bytes": 1529,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 16384
+        },
+        "wall": 0.239,
+        "bytes": 980,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 32768
+        },
+        "wall": 0.404,
+        "bytes": 979,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 65536
+        },
+        "wall": 0.748,
+        "bytes": 1268,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 131072
+        },
+        "wall": 1.144,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 98304
+        },
+        "wall": 1.054,
+        "bytes": 1241,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 114688
+        },
+        "wall": 1.04,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 106496
+        },
+        "wall": 1.055,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 102400
+        },
+        "wall": 1.061,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 100352
+        },
+        "wall": 1.087,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 99328
+        },
+        "wall": 1.073,
+        "bytes": 1303,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 99840
+        },
+        "wall": 1.067,
+        "bytes": 1268,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 100096
+        },
+        "wall": 1.256,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 99968
+        },
+        "wall": 1.163,
+        "bytes": 528,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 100032
+        },
+        "wall": 1.218,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 100000
+        },
+        "wall": 1.174,
+        "bytes": 997,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 100016
+        },
+        "wall": 1.142,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 100008
+        },
+        "wall": 1.144,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 100004
+        },
+        "wall": 1.118,
+        "bytes": 393,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 100006
+        },
+        "wall": 1.126,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 1,
+         "offset": 100005
+        },
+        "wall": 1.127,
+        "bytes": 20,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "exponential+binary offset search, count=1 pages",
+      "answer": "newest at offset 100004 (history 100005)",
+      "correct": true,
+      "notes": "",
+      "n_calls": 35,
+      "wall": 21.685,
+      "bytes": 24838
+     },
+     "S2": {
+      "id": "S2",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "^HTTP/1.1 403",
+         "count": 500,
+         "offset": 0
+        },
+        "wall": 0.446,
+        "bytes": 243463,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "^HTTP/1.1 403",
+         "count": 500,
+         "offset": 500
+        },
+        "wall": 0.447,
+        "bytes": 243448,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "^HTTP/1.1 403",
+         "count": 500,
+         "offset": 1000
+        },
+        "wall": 0.474,
+        "bytes": 243463,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "^HTTP/1.1 403",
+         "count": 500,
+         "offset": 1500
+        },
+        "wall": 0.461,
+        "bytes": 243448,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "^HTTP/1.1 403",
+         "count": 500,
+         "offset": 2000
+        },
+        "wall": 0.443,
+        "bytes": 243471,
+        "isError": false,
+        "note": ""
+       },
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "^HTTP/1.1 403",
+         "count": 500,
+         "offset": 2500
+        },
+        "wall": 0.476,
+        "bytes": 131460,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "page get_proxy_http_history_regex{regex:'^HTTP/1.1 403'} and count",
+      "answer": "2770 matches expected 2770 in 6 pages of 500",
+      "correct": true,
+      "notes": "",
+      "n_calls": 6,
+      "wall": 2.747,
+      "bytes": 1348753
+     },
+     "S3": {
+      "id": "S3",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history_regex",
+        "args": {
+         "regex": "FLAG\\{needle-7f3a91\\}",
+         "count": 500,
+         "offset": 0
+        },
+        "wall": 0.502,
+        "bytes": 5078,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "get_proxy_http_history_regex{regex:'FLAG...'} count by paging",
+      "answer": "5 expected 5 in 1 pages",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.502,
+      "bytes": 5078
+     },
+     "S4": {
+      "id": "S4",
+      "calls": [
+       {
+        "tool": "get_proxy_http_history",
+        "args": {
+         "count": 500,
+         "offset": 0
+        },
+        "wall": 0.097,
+        "bytes": 668573,
+        "isError": false,
+        "note": ""
+       }
+      ],
+      "strategy": "page history 500 items at a time, parse 'Host:'",
+      "answer": "6 hosts after 1 page(s)",
+      "correct": true,
+      "notes": "",
+      "n_calls": 1,
+      "wall": 0.097,
+      "bytes": 668573
+     }
+    }
+   }
+  },
+  "part3": {
+   "tools": 27,
+   "tools_list_json_bytes": 8547,
+   "with_envelope": 8586
+  },
+  "part4": {
+   "A1": {
+    "runs": [
+     {
+      "correct": false,
+      "wall_s": 8.7,
+      "turns": 4,
+      "tool_calls": 2,
+      "tool_output_bytes": 569,
+      "cost_usd": 0.05201890000000001,
+      "input_tokens": 8,
+      "output_tokens": 320,
+      "cache_read_input_tokens": 52085,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": true,
+      "wall_s": 22.9,
+      "turns": 15,
+      "tool_calls": 13,
+      "tool_output_bytes": 7213,
+      "cost_usd": 0.14695060000000001,
+      "input_tokens": 16,
+      "output_tokens": 1314,
+      "cache_read_input_tokens": 119499,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": true,
+      "wall_s": 22.6,
+      "turns": 13,
+      "tool_calls": 11,
+      "tool_output_bytes": 6477,
+      "cost_usd": 0.12819280000000002,
+      "input_tokens": 16,
+      "output_tokens": 1277,
+      "cache_read_input_tokens": 121329,
+      "timed_out": false,
+      "subtype": "success"
+     }
+    ],
+    "median": {
+     "wall_s": 22.6,
+     "turns": 13,
+     "tool_calls": 11,
+     "tool_output_bytes": 6477,
+     "cost_usd": 0.128,
+     "input_tokens": 16,
+     "output_tokens": 1277
+    },
+    "correct_runs": 2,
+    "n_runs": 3,
+    "answers": [
+     "The most recent request in the proxy history is:\n\n**POST** http://auth.localhost:18080/login",
+     "Confirmed \u2014 index 20000 is the last item in the proxy history.\n\n**Most recent request:**\n\n**GET** `http://api.localhost:18080/api/v1/health?final=1`",
+     "The most recent request in the proxy history is:\n\n**GET** `http://api.localhost:18080/api/v1/health?final=1`\n\n(Response: `200 OK`, body `{\"ok\": true, \"final\": \"1\"}`)"
+    ]
+   },
+   "A2": {
+    "runs": [
+     {
+      "correct": true,
+      "wall_s": 120.9,
+      "turns": 21,
+      "tool_calls": 19,
+      "tool_output_bytes": 423057,
+      "cost_usd": 1.4048513,
+      "input_tokens": 42,
+      "output_tokens": 13501,
+      "cache_read_input_tokens": 2194213,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": true,
+      "wall_s": 52.0,
+      "turns": 21,
+      "tool_calls": 20,
+      "tool_output_bytes": 54911,
+      "cost_usd": 0.241083,
+      "input_tokens": 22,
+      "output_tokens": 6110,
+      "cache_read_input_tokens": 222150,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": true,
+      "wall_s": 69.5,
+      "turns": 23,
+      "tool_calls": 21,
+      "tool_output_bytes": 79768,
+      "cost_usd": 0.5121686999999999,
+      "input_tokens": 46,
+      "output_tokens": 4168,
+      "cache_read_input_tokens": 992250,
+      "timed_out": false,
+      "subtype": "success"
+     }
+    ],
+    "median": {
+     "wall_s": 69.5,
+     "turns": 21,
+     "tool_calls": 20,
+     "tool_output_bytes": 79768,
+     "cost_usd": 0.512,
+     "input_tokens": 42,
+     "output_tokens": 6110
+    },
+    "correct_runs": 3,
+    "n_runs": 3,
+    "answers": [
+     "**554** requests to `admin.localhost` received a 403 response, but I counted them by hand, so treat the number with some caution.\n\nThe proxy history has 776 entries for `admin.localhost:18080`. The regex tool can't match a request together with its response and doesn't return a count. I paged through all 776 entries, 50 at a time, and tallied the 403 responses myself. A single miscount is possible",
+     "**554** requests to `admin.localhost` received a 403 response.\n\nI got this by paging through every proxy history item that mentions `admin.localhost`, which came to 776 items. The 403s were counted by response status line only. Every item I looked at was sent to `Host: admin.localhost:18080`.\n\n- **Items 1\u2013700:** I counted the 403 status lines in the saved result files with grep, which gave 502.\n- ",
+     "All sampled 403 responses across the entire range (offsets 0\u2013553) are consistently to `admin.localhost`. Total count found: **554**."
+    ]
+   },
+   "A3": {
+    "runs": [
+     {
+      "correct": true,
+      "wall_s": 27.8,
+      "turns": 8,
+      "tool_calls": 6,
+      "tool_output_bytes": 11848,
+      "cost_usd": 0.1472925,
+      "input_tokens": 16,
+      "output_tokens": 1727,
+      "cache_read_input_tokens": 138799,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": true,
+      "wall_s": 45.9,
+      "turns": 8,
+      "tool_calls": 6,
+      "tool_output_bytes": 11910,
+      "cost_usd": 0.16901270000000002,
+      "input_tokens": 16,
+      "output_tokens": 3114,
+      "cache_read_input_tokens": 143310,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": true,
+      "wall_s": 32.4,
+      "turns": 9,
+      "tool_calls": 7,
+      "tool_output_bytes": 21398,
+      "cost_usd": 0.1789029,
+      "input_tokens": 18,
+      "output_tokens": 1672,
+      "cache_read_input_tokens": 179121,
+      "timed_out": false,
+      "subtype": "success"
+     }
+    ],
+    "median": {
+     "wall_s": 32.4,
+     "turns": 8,
+     "tool_calls": 6,
+     "tool_output_bytes": 11910,
+     "cost_usd": 0.169,
+     "input_tokens": 16,
+     "output_tokens": 1727
+    },
+    "correct_runs": 3,
+    "n_runs": 3,
+    "answers": [
+     "Found it.\n\n- **AWS Access Key:** `AKIAQ3EXAMPLEKEY7777`\n- **File URL:** `http://static.localhost:18080/assets/vendor.3c9e.js`\n\nIt's embedded in a JS bundle as `var awsKey=\"AKIAQ3EXAMPLEKEY7777\";`, buried among obfuscated filler variables in the minified vendor bundle.",
+     "Confirmed \u2014 the AWS access key is embedded directly in the minified bundle, spliced into a filler-variable line.\n\n**AWS Access Key:** `AKIAQ3EXAMPLEKEY7777`\n\n**File URL:** `http://static.localhost:18080/assets/vendor.3c9e.js`\n\nIt appears at line ~2521 of the file as `var awsKey=\"AKIAQ3EXAMPLEKEY7777\";`, embedded in the middle of one of the bundle's junk filler variable declarations (`var a2508=...",
+     "Found it.\n\n- **AWS Access Key:** `AKIAQ3EXAMPLEKEY7777`\n- **File URL:** `http://static.localhost:18080/assets/vendor.3c9e.js`\n\nIt's embedded as `var awsKey=\"AKIAQ3EXAMPLEKEY7777\";` inside the minified JS bundle, buried among junk filler variable declarations (likely an attempt to obscure it among noise)."
+    ]
+   },
+   "A4": {
+    "runs": [
+     {
+      "correct": true,
+      "wall_s": 14.1,
+      "turns": 4,
+      "tool_calls": 2,
+      "tool_output_bytes": 13387,
+      "cost_usd": 0.1042503,
+      "input_tokens": 6,
+      "output_tokens": 847,
+      "cache_read_input_tokens": 32767,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": true,
+      "wall_s": 13.8,
+      "turns": 4,
+      "tool_calls": 2,
+      "tool_output_bytes": 13387,
+      "cost_usd": 0.1019661,
+      "input_tokens": 6,
+      "output_tokens": 611,
+      "cache_read_input_tokens": 32767,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": true,
+      "wall_s": 14.8,
+      "turns": 4,
+      "tool_calls": 2,
+      "tool_output_bytes": 13387,
+      "cost_usd": 0.1020144,
+      "input_tokens": 6,
+      "output_tokens": 639,
+      "cache_read_input_tokens": 32767,
+      "timed_out": false,
+      "subtype": "success"
+     }
+    ],
+    "median": {
+     "wall_s": 14.1,
+     "turns": 4,
+     "tool_calls": 2,
+     "tool_output_bytes": 13387,
+     "cost_usd": 0.102,
+     "input_tokens": 6,
+     "output_tokens": 639
+    },
+    "correct_runs": 3,
+    "n_runs": 3,
+    "answers": [
+     "Based on the proxy history, three distinct endpoints take URL-bearing parameters \u2014 repeated many times in the traffic, but all the same three patterns:\n\n| Endpoint | Host | Parameter | Issue | Evidence |\n|---|---|---|---|---|\n| `GET /fetch` | `shop.localhost:18080` | `url` | **SSRF** \u2014 server fetches the given URL server-side; observed pointed at `http://169.254.169.254/latest/meta-data/` (cloud m",
+     "These three distinct endpoints repeat throughout the history (the duplicates are just repeated traffic to the same targets):\n\n| Host | Path | Parameter | Notes |\n|---|---|---|---|\n| `shop.localhost:18080` | `/fetch` | `url` | Server-side fetch of attacker-controlled URL \u2014 observed fetching `http://169.254.169.254/latest/meta-data/` (cloud metadata), classic SSRF, confirmed exploitable |\n| `api.loc",
+     "Based on the proxy history, three distinct endpoints carry URL-valued parameters that are strong SSRF/open-redirect candidates:\n\n| Endpoint path | Parameter | Issue type | Evidence |\n|---|---|---|---|\n| `GET /fetch` (shop.localhost:18080) | `url` | **SSRF** | Supplied value `http://169.254.169.254/latest/meta-data/` (cloud metadata endpoint) is accepted and the server fetches it (`\"fetched\": ..., "
+    ]
+   },
+   "A6": {
+    "runs": [
+     {
+      "correct": false,
+      "wall_s": 137.0,
+      "turns": 55,
+      "tool_calls": 54,
+      "tool_output_bytes": 967547,
+      "cost_usd": 2.8092561000000003,
+      "input_tokens": 34,
+      "output_tokens": 17034,
+      "cache_read_input_tokens": 3788801,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": false,
+      "wall_s": 44.7,
+      "turns": 18,
+      "tool_calls": 17,
+      "tool_output_bytes": 101638,
+      "cost_usd": 0.35890520000000004,
+      "input_tokens": 26,
+      "output_tokens": 4099,
+      "cache_read_input_tokens": 606632,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": false,
+      "wall_s": 92.5,
+      "turns": 29,
+      "tool_calls": 28,
+      "tool_output_bytes": 547303,
+      "cost_usd": 1.7245974000000002,
+      "input_tokens": 48,
+      "output_tokens": 9534,
+      "cache_read_input_tokens": 3719534,
+      "timed_out": false,
+      "subtype": "success"
+     }
+    ],
+    "median": {
+     "wall_s": 92.5,
+     "turns": 29,
+     "tool_calls": 28,
+     "tool_output_bytes": 547303,
+     "cost_usd": 1.725,
+     "input_tokens": 34,
+     "output_tokens": 9534
+    },
+    "correct_runs": 0,
+    "n_runs": 3,
+    "answers": [
+     "I can't give you exact per-host totals. The proxy history has more than 1,000 entries, and I ran out of budget before I could page through all of it.\n\nI did count every request in the first 720 entries (offsets 0\u2013719) by reading each page. The page-by-page counts summed to 720, so they match the number of entries read:\n\n| Host | Requests (first 720 only) |\n|---|---|\n| `shop.localhost:18080` | 342 ",
+     "I can't give exact per-host counts. The proxy history holds 20,001 requests, and I could only read 65 of them.\n\n**Total size:** The last item is at offset 20000, and offset 20001 returns \"Reached end of items\". The final item is a `GET /api/v1/health?final=1` request with the user agent `bench-final`.\n\n**Hosts seen so far**, all on port 18080:\n- `api.localhost:18080`\n- `shop.localhost:18080`\n- `au",
+     "I can't give you the exact request count for each host. The proxy history holds 20,001 requests, and I only tallied the first 420 of them.\n\nThe proxy tool has no count or summary function and returns full request and response bodies. A page of about 25 items costs roughly $0.10, so counting all 20,001 would run to about $80 against the $3 budget. I stopped here instead of guessing.\n\n**Hosts in the"
+    ]
+   },
+   "A5": {
+    "runs": [
+     {
+      "correct": true,
+      "wall_s": 15.8,
+      "turns": 5,
+      "tool_calls": 3,
+      "tool_output_bytes": 1509,
+      "cost_usd": 0.0955536,
+      "input_tokens": 10,
+      "output_tokens": 651,
+      "cache_read_input_tokens": 64838,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": true,
+      "wall_s": 16.8,
+      "turns": 7,
+      "tool_calls": 5,
+      "tool_output_bytes": 2018,
+      "cost_usd": 0.10571459999999999,
+      "input_tokens": 14,
+      "output_tokens": 827,
+      "cache_read_input_tokens": 97963,
+      "timed_out": false,
+      "subtype": "success"
+     },
+     {
+      "correct": true,
+      "wall_s": 16.1,
+      "turns": 6,
+      "tool_calls": 4,
+      "tool_output_bytes": 1509,
+      "cost_usd": 0.10059799999999999,
+      "input_tokens": 12,
+      "output_tokens": 724,
+      "cache_read_input_tokens": 81130,
+      "timed_out": false,
+      "subtype": "success"
+     }
+    ],
+    "median": {
+     "wall_s": 16.1,
+     "turns": 6,
+     "tool_calls": 4,
+     "tool_output_bytes": 1509,
+     "cost_usd": 0.101,
+     "input_tokens": 12,
+     "output_tokens": 724
+    },
+    "correct_runs": 3,
+    "n_runs": 3,
+    "answers": [
+     "**401 Unauthorized** \u2014 the endpoint correctly rejects the request without the `Authorization` header (`{\"error\": \"missing bearer token\"}`). So `/api/v1/users/7777` requires authentication; the original 200 response (with the admin-role bearer token) was not due to a missing-auth vulnerability.",
+     "The resent request without the `Authorization` header returned **HTTP 401 Unauthorized** (`{\"error\": \"missing bearer token\"}`), confirming the endpoint properly rejects unauthenticated requests \u2014 unlike the original authenticated request, which returned 200 OK.",
+     "**401 Unauthorized**\n\nWithout the `Authorization` header, the server rejects the request with `401 Unauthorized` and body `{\"error\": \"missing bearer token\"}` \u2014 so this endpoint correctly enforces authentication when no token is present (unlike an IDOR/broken-authz issue, which would show up as a 200 with a *different* valid bearer token for another user)."
+    ]
+   },
+   "__total__": {
+    "cost_usd": 8.483,
+    "runs": 18,
+    "correct_runs": 14
+   }
+  }
+ },
+ "burp-fork-v3": {
+  "meta": {
+   "jar": "~/RT/burp-mcp-enhanced/build/libs/burpy.jar",
+   "sha256": "9fc7c2eeabcd24d902fa6d49c6a1aedb7c9b921d34a94a43e0a80ffcc4673368",
+   "commit": "bf012d6",
+   "manifest_version": "1.3.0-enhanced.2",
+   "serverInfo": {
+    "name": "burp-suite",
+    "version": "1.3.0-enhanced.2"
+   },
+   "project": "/tmp/burp-bench/fork3.burp (fresh)",
+   "corpus_k1_seconds": 21.0,
+   "history_after_load": 20001,
+   "rss_startup_mb": 1550,
+   "rss_after_20k_mb": 2699,
+   "approvals": "pre-granted: 'Always Allow HTTP history' + 'Always Allow Host' for the 6 *.localhost vhosts",
+   "part2": "skipped by request (the sweep does not use the new tool)",
+   "new_tool": "search_proxy_http_history{regex,parts,contextChars,maxPerItem,maxScanBytes,count,offset,newestFirst} -> {totalMatches,items[{index,id,method,host,path,statusCode,matches[{message,part,offset,matchLength,context}]}]}"
+  },
+  "part1": {
+   "T1": {
+    "id": "T1",
+    "calls": [
+     {
+      "tool": "get_latest_proxy_http_history",
+      "args": {
+       "count": 1
+      },
+      "wall": 0.024,
+      "bytes": 701,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "get_latest_proxy_http_history{count:1}",
+    "answer": "newest item is GET /api/v1/health?final=1",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.024,
+    "bytes": 701
+   },
+   "T2": {
+    "id": "T2",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "FLAG\\{needle-7f3a91\\}",
+       "count": 5,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index",
+        "method",
+        "url",
+        "statusCode"
+       ]
+      },
+      "wall": 0.158,
+      "bytes": 111,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "get_proxy_http_history_regex{regex:'FLAG..',count:5,fields:[index,method,url,statusCode]} (unchanged); alt = search_proxy_http_history",
+    "alt_strategy": [
+     {
+      "tool": "search_proxy_http_history",
+      "args": {
+       "regex": "FLAG\\{needle-7f3a91\\}",
+       "count": 5,
+       "offset": 0
+      },
+      "wall": 0.149,
+      "bytes": 336,
+      "isError": false,
+      "note": "new tool: item row + match excerpt"
+     }
+    ],
+    "answer": "old regex+fields -> 1 item /api/v1/users/7777; new search -> totalMatches=1, key in context=True",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.158,
+    "bytes": 111,
+    "v2_comparison": "old regex+fields 1 call / 111 B (unchanged); search_proxy_http_history alternative 1 call / 336 B"
+   },
+   "T3": {
+    "id": "T3",
+    "calls": [
+     {
+      "tool": "search_proxy_http_history",
+      "args": {
+       "regex": "AKIAQ3EXAMPLEKEY7777",
+       "count": 5,
+       "offset": 0
+      },
+      "wall": 0.12,
+      "bytes": 706,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "search_proxy_http_history{regex:'AKIAQ3EXAMPLEKEY7777'} - returns the hit with context",
+    "answer": "totalMatches=2, key visible=True, offset=79810 in body",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.12,
+    "bytes": 706,
+    "v2_comparison": "1.2.x/1.3.0 fork before this feature: 1 call but the 5000-char item truncation hid the body slice; now 1 call returns the key itself"
+   },
+   "T4": {
+    "id": "T4",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "X-Debug-Token: dbg-41c2",
+       "count": 5,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index",
+        "url"
+       ]
+      },
+      "wall": 0.114,
+      "bytes": 70,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "get_proxy_http_history_regex{regex:'X-Debug-Token: dbg-41c2'}",
+    "answer": "1 item shop /product/1, global index=8889",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.114,
+    "bytes": 70
+   },
+   "T5": {
+    "id": "T5",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_filtered",
+      "args": {
+       "host": "admin.localhost",
+       "statusCode": 403,
+       "count": 1,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index"
+       ]
+      },
+      "wall": 0.108,
+      "bytes": 92,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "get_proxy_http_history_filtered{host:admin.localhost,statusCode:403,count:1} -> totalMatches",
+    "answer": "totalMatches=554 (expected 554)",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.108,
+    "bytes": 92
+   },
+   "T6": {
+    "id": "T6",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "<svg/onload=omp",
+       "count": 20,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index",
+        "url"
+       ]
+      },
+      "wall": 0.125,
+      "bytes": 489,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "get_proxy_http_history_regex{regex:'<svg/onload=omp'} (unchanged); alt = search_proxy_http_history",
+    "alt_strategy": [
+     {
+      "tool": "search_proxy_http_history",
+      "args": {
+       "regex": "<svg/onload=omp",
+       "count": 20,
+       "offset": 0
+      },
+      "wall": 0.12,
+      "bytes": 1634,
+      "isError": false,
+      "note": "new tool"
+     }
+    ],
+    "answer": "old regex -> 5; new search -> totalMatches=5",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.125,
+    "bytes": 489,
+    "v2_comparison": "old regex 1 call / 489 B (unchanged); search_proxy_http_history alternative 1 call / 1634 B"
+   },
+   "T7": {
+    "id": "T7",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "(url=|callback=|redirect_uri=)",
+       "count": 60,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index",
+        "url"
+       ]
+      },
+      "wall": 0.603,
+      "bytes": 3259,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "get_proxy_http_history_regex{regex:'(url=|callback=|redirect_uri=)'}",
+    "answer": "25 (expected 25)",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.603,
+    "bytes": 3259
+   },
+   "T8": {
+    "id": "T8",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_count",
+      "args": {
+       "regex": "Traceback"
+      },
+      "wall": 0.112,
+      "bytes": 2,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_count",
+      "args": {
+       "regex": "NullPointerException"
+      },
+      "wall": 0.119,
+      "bytes": 2,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "2x get_proxy_http_history_count{regex}",
+    "answer": "Traceback=42 NPE=52",
+    "correct": true,
+    "notes": "",
+    "n_calls": 2,
+    "wall": 0.231,
+    "bytes": 4
+   },
+   "T9": {
+    "id": "T9",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history",
+      "args": {
+       "count": 500,
+       "offset": 0,
+       "newestFirst": true,
+       "fields": [
+        "host"
+       ]
+      },
+      "wall": 0.04,
+      "bytes": 25917,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_count",
+      "args": {
+       "regex": "^Host: admin\\.localhost\\r"
+      },
+      "wall": 0.085,
+      "bytes": 1,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_count",
+      "args": {
+       "regex": "^Host: api\\.localhost\\r"
+      },
+      "wall": 0.091,
+      "bytes": 1,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_count",
+      "args": {
+       "regex": "^Host: auth\\.localhost\\r"
+      },
+      "wall": 0.087,
+      "bytes": 1,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_count",
+      "args": {
+       "regex": "^Host: graphql\\.localhost\\r"
+      },
+      "wall": 0.088,
+      "bytes": 1,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_count",
+      "args": {
+       "regex": "^Host: shop\\.localhost\\r"
+      },
+      "wall": 0.112,
+      "bytes": 1,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_count",
+      "args": {
+       "regex": "^Host: static\\.localhost\\r"
+      },
+      "wall": 0.09,
+      "bytes": 1,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "page history 500 at a time with fields:[host] (no sitemap tool)",
+    "answer": "6 hosts: ['admin.localhost', 'api.localhost', 'auth.localhost', 'graphql.localhost', 'shop.localhost', 'static.localhost']",
+    "correct": true,
+    "notes": "",
+    "n_calls": 7,
+    "wall": 0.593,
+    "bytes": 25923
+   },
+   "T10": {
+    "id": "T10",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_filtered",
+      "args": {
+       "pathContains": "/big/report.json",
+       "count": 5,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index",
+        "path",
+        "responseContentLength"
+       ]
+      },
+      "wall": 0.115,
+      "bytes": 329,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_body",
+      "args": {
+       "index": 302,
+       "message": "response",
+       "offset": 600000,
+       "length": 2000
+      },
+      "wall": 0.019,
+      "bytes": 2000,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "filtered{pathContains:/big/report.json} then get_proxy_http_history_body{offset:600000,length:2000}",
+    "answer": "index=302 slice_len=2000 exact_match=True",
+    "correct": true,
+    "notes": "",
+    "n_calls": 2,
+    "wall": 0.134,
+    "bytes": 2329
+   },
+   "T11": {
+    "id": "T11",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_filtered",
+      "args": {
+       "method": "POST",
+       "host": "api.localhost",
+       "pathContains": "/api/v1/orders",
+       "count": 1,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index"
+       ]
+      },
+      "wall": 0.105,
+      "bytes": 88,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "filtered{method:POST,host:api.localhost,pathContains:/api/v1/orders,count:1} -> totalMatches",
+    "answer": "totalMatches=598",
+    "correct": true,
+    "notes": "",
+    "n_calls": 1,
+    "wall": 0.105,
+    "bytes": 88
+   },
+   "T12": {
+    "id": "T12",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_count",
+      "args": {
+       "regex": "user\\d+@example\\.test"
+      },
+      "wall": 0.162,
+      "bytes": 4,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_regex",
+      "args": {
+       "regex": "user\\d+@example\\.test",
+       "count": 10,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index",
+        "responseContentLength"
+       ]
+      },
+      "wall": 0.157,
+      "bytes": 496,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "count{regex} + regex page of 10",
+    "answer": "count=5211; page -> 10",
+    "correct": true,
+    "notes": "",
+    "n_calls": 2,
+    "wall": 0.319,
+    "bytes": 500
+   },
+   "T13": {
+    "id": "T13",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_filtered",
+      "args": {
+       "host": "api.localhost",
+       "statusCode": 401,
+       "count": 1,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index",
+        "url"
+       ]
+      },
+      "wall": 0.152,
+      "bytes": 143,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "send_http_request_from_history",
+      "args": {
+       "index": 45,
+       "replaceHeaders": {
+        "Authorization": "Bearer add-me"
+       }
+      },
+      "wall": 1.021,
+      "bytes": 596,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_filtered",
+      "args": {
+       "host": "admin.localhost",
+       "statusCode": 403,
+       "count": 1,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index",
+        "url"
+       ]
+      },
+      "wall": 0.092,
+      "bytes": 140,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "send_http_request_from_history",
+      "args": {
+       "index": 122,
+       "replaceHeaders": {
+        "Cookie": "role=admin"
+       }
+      },
+      "wall": 0.019,
+      "bytes": 801,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "filtered 401 -> send_http_request_from_history{replaceHeaders}",
+    "answer": "add Authorization: 200; Cookie role=admin: 200",
+    "correct": true,
+    "notes": "",
+    "n_calls": 4,
+    "wall": 1.284,
+    "bytes": 1680
+   },
+   "T14": {
+    "id": "T14",
+    "calls": [
+     {
+      "tool": "get_proxy_http_history_filtered",
+      "args": {
+       "pathContains": ".png",
+       "count": 1,
+       "offset": 0,
+       "newestFirst": false,
+       "fields": [
+        "index",
+        "path",
+        "responseContentLength",
+        "mimeType"
+       ]
+      },
+      "wall": 0.097,
+      "bytes": 171,
+      "isError": false,
+      "note": ""
+     },
+     {
+      "tool": "get_proxy_http_history_body",
+      "args": {
+       "index": 51,
+       "message": "response",
+       "offset": 0,
+       "length": 9000
+      },
+      "wall": 0.018,
+      "bytes": 12022,
+      "isError": false,
+      "note": ""
+     }
+    ],
+    "strategy": "filtered{.png} -> body slice, latin-1 round trip",
+    "answer": "index=51 bytes=8008 sha256_roundtrip_ok=True",
+    "correct": true,
+    "notes": "",
+    "n_calls": 2,
+    "wall": 0.115,
+    "bytes": 12193
+   }
+  },
+  "part3": {
+   "tool_count": 43,
+   "toolslist_result_bytes": 17197,
+   "tools_list_jsonrpc_bytes": 17236,
+   "vs_burp_fork": {
+    "tool_count": 1,
+    "bytes": 1275
+   }
+  },
+  "part4": {
+   "A1": {
+    "runs": [
+     {
+      "correct": true,
+      "wall_s": 7.1,
+      "turns": 3,
+      "tool_calls": 2,
+      "tool_output_bytes": 701,
+      "cost_usd": 0.0318305,
+      "input_tokens": 6,
+      "output_tokens": 213,
+      "cache_read_input_tokens": 40485,
+      "timed_out": false,
+      "subtype": "success",
+      "tools_used": {
+       "ToolSearch": 1,
+       "get_latest_proxy_http_history": 1
+      }
+     },
+     {
+      "correct": true,
+      "wall_s": 6.1,
+      "turns": 3,
+      "tool_calls": 2,
+      "tool_output_bytes": 701,
+      "cost_usd": 0.0271888,
+      "input_tokens": 6,
+      "output_tokens": 230,
+      "cache_read_input_tokens": 42088,
+      "timed_out": false,
+      "subtype": "success",
+      "tools_used": {
+       "ToolSearch": 1,
+       "get_latest_proxy_http_history": 1
+      }
+     },
+     {
+      "correct": true,
+      "wall_s": 4.9,
+      "turns": 3,
+      "tool_calls": 2,
+      "tool_output_bytes": 701,
+      "cost_usd": 0.027183899999999997,
+      "input_tokens": 6,
+      "output_tokens": 232,
+      "cache_read_input_tokens": 42079,
+      "timed_out": false,
+      "subtype": "success",
+      "tools_used": {
+       "ToolSearch": 1,
+       "get_latest_proxy_http_history": 1
+      }
+     }
+    ],
+    "median": {
+     "wall_s": 6.1,
+     "turns": 3,
+     "tool_calls": 2,
+     "tool_output_bytes": 701,
+     "cost_usd": 0.027,
+     "input_tokens": 6,
+     "output_tokens": 230
+    },
+    "correct_runs": 3,
+    "n_runs": 3,
+    "answers": [
+     "The most recent request in the proxy history (index 20001) is:\n\n**GET http://api.localhost:18080/api/v1/health?final=1**\n\nIt returned a 200 response.",
+     "The most recent request in the proxy history is item #20001:\n\n**GET http://api.localhost:18080/api/v1/health?final=1**\n\nIt returned 200 OK.",
+     "The most recent request in the proxy history (index 20001) is:\n\n**GET http://api.localhost:18080/api/v1/health?final=1**\n\nIt returned a 200 response."
+    ],
+    "search_tool_used": 0
+   },
+   "A2": {
+    "runs": [
+     {
+      "correct": true,
+      "wall_s": 19.6,
+      "turns": 10,
+      "tool_calls": 9,
+      "tool_output_bytes": 3978,
+      "cost_usd": 0.0662137,
+      "input_tokens": 14,
+      "output_tokens": 1532,
+      "cache_read_input_tokens": 118057,
+      "timed_out": false,
+      "subtype": "success",
+      "tools_used": {
+       "ToolSearch": 2,
+       "get_proxy_http_history_count": 5,
+       "get_proxy_http_history_regex": 1,
+       "get_proxy_http_history_filtered": 1
+      }
+     },
+     {
+      "correct": true,
+      "wall_s": 7.2,
+      "turns": 3,
+      "tool_calls": 2,
+      "tool_output_bytes": 92,
+      "cost_usd": 0.033037000000000004,
+      "input_tokens": 6,
+      "output_tokens": 484,
+      "cache_read_input_tokens": 43090,
+      "timed_out": false,
+      "subtype": "success",
+      "tools_used": {
+       "ToolSearch": 1,
+       "get_proxy_http_history_filtered": 1
+      }
+     },
+     {
+      "correct": true,
+      "wall_s": 10.8,
+      "turns": 4,
+      "tool_calls": 2,
+      "tool_output_bytes": 96,
+      "cost_usd": 0.03729099999999999,
+      "input_tokens": 8,
+      "output_tokens": 603,
+      "cache_read_input_tokens": 59850,
+      "timed_out": false,
+      "subtype": "success",
+      "tools_used": {
+       "ToolSearch": 1,
+       "get_proxy_http_history_filtered": 1
+      }
+     }
+    ],
+    "median": {
+     "wall_s": 10.8,
+     "turns": 4,
+     "tool_calls": 2,
+     "tool_output_bytes": 96,
+     "cost_usd": 0.037,
+     "input_tokens": 8,
+     "output_tokens": 603
+    },
+    "correct_runs": 3,
+    "n_runs": 3,
+    "answers": [
+     "**554** requests to admin.localhost received a 403 response.\n\nTwo checks agree on this. The host and status filter on admin.localhost with status 403 reports 554 matches. A regex count of all 403 responses in the whole proxy history also gives 554, so every 403 in the history is on admin.localhost.",
+     "**554** requests to admin.localhost received a 403 response. That is the `totalMatches` value from Burp's proxy history filter on host `admin.localhost` and status code 403.\n\nThe host filter accepts a host with or without its port, so this count includes admin.localhost requests on any port.",
+     "The proxy history has 554 requests to `admin.localhost` with a 403 response. That is the `totalMatches` count from a history filter on host `admin.localhost` and status code 403. The tool says the host match works with or without a port."
+    ],
+    "search_tool_used": 0
+   },
+   "A3": {
+    "runs": [
+     {
+      "correct": true,
+      "wall_s": 8.3,
+      "turns": 3,
+      "tool_calls": 2,
+      "tool_output_bytes": 968,
+      "cost_usd": 0.0348191,
+      "input_tokens": 6,
+      "output_tokens": 580,
+      "cache_read_input_tokens": 42271,
+      "timed_out": false,
+      "subtype": "success",
+      "tools_used": {
+       "ToolSearch": 1,
+       "search_proxy_http_history": 1
+      }
+     },
+     {
+      "correct": true,
+      "wall_s": 28.5,
+      "turns": 11,
+      "tool_calls": 9,
+      "tool_output_bytes": 12242,
+      "cost_usd": 0.14915050000000002,
+      "input_tokens": 20,
+      "output_tokens": 1652,
+      "cache_read_input_tokens": 187433,
+      "timed_out": false,
+      "subtype": "success",
+      "tools_used": {
+       "ToolSearch": 2,
+       "get_proxy_http_history_regex": 3,
+       "get_proxy_http_history_body": 2,
+       "Grep": 1,
+       "Read": 1
+      }
+     },
+     {
+      "correct": true,
+      "wall_s": 14.8,
+      "turns": 5,
+      "tool_calls": 3,
+      "tool_output_bytes": 1123,
+      "cost_usd": 0.0855366,
+      "input_tokens": 8,
+      "output_tokens": 587,
+      "cache_read_input_tokens": 48057,
+      "timed_out": false,
+      "subtype": "success",
+      "tools_used": {
+       "ToolSearch": 1,
+       "search_proxy_http_history": 2
+      }
+     }
+    ],
+    "median": {
+     "wall_s": 14.8,
+     "turns": 5,
+     "tool_calls": 3,
+     "tool_output_bytes": 1123,
+     "cost_usd": 0.086,
+     "input_tokens": 8,
+     "output_tokens": 587
+    },
+    "correct_runs": 3,
+    "n_runs": 3,
+    "answers": [
+     "The AWS access key is `AKIAQ3EXAMPLEKEY7777`.\n\nIt is in the response body of `http://static.localhost/assets/vendor.3c9e.js`, assigned as `var awsKey=\"AKIAQ3EXAMPLEKEY7777\";`. That response is a 200 to a GET request, at byte offset 79810.\n\nThe same file appears twice in the proxy history, at indexes 4103 and 16022. Both responses contain the identical key.\n\nI only searched for the key pattern `AKI",
+     "Found it.\n\n- **AWS Access Key:** `AKIAQ3EXAMPLEKEY7777`\n- **File URL:** `http://static.localhost:18080/assets/vendor.3c9e.js`\n\nIt appears embedded in a `var awsKey=\"AKIAQ3EXAMPLEKEY7777\";` statement inside the JS bundle (proxy history index 4103, also seen again at index 16022).",
+     "Found it.\n\n- **AWS Access Key:** `AKIAQ3EXAMPLEKEY7777`\n- **File URL:** `http://static.localhost/assets/vendor.3c9e.js`\n\nIt's embedded in a JS variable (`var awsKey=\"AKIAQ3EXAMPLEKEY7777\";`) buried among obfuscated filler variables in the vendor bundle (seen at proxy history indices 4103 and 16022, same file requested twice)."
+    ],
+    "search_tool_used": 2
+   },
+   "A4": {
+    "runs": [
+     {
+      "correct": true,
+      "wall_s": 23.1,
+      "turns": 6,
+      "tool_calls": 4,
+      "tool_output_bytes": 8983,
+      "cost_usd": 0.16133840000000002,
+      "input_tokens": 10,
+      "output_tokens": 1415,
+      "cache_read_input_tokens": 54350,
+      "timed_out": false,
+      "subtype": "success",
+      "tools_used": {
+       "ToolSearch": 1,
+       "search_proxy_http_history": 3
+      }
+     },
+     {
+      "correct": true,
+      "wall_s": 22.7,
+      "turns": 4,
+      "tool_calls": 2,
+      "tool_output_bytes": 10274,
+      "cost_usd": 0.1060101,
+      "input_tokens": 6,
+      "output_tokens": 1065,
+      "cache_read_input_tokens": 32767,
+      "timed_out": false,
+      "subtype": "success",
+      "tools_used": {
+       "ToolSearch": 1,
+       "get_proxy_http_history_regex": 1
+      }
+     },
+     {
+      "correct": true,
+      "wall_s": 19.4,
+      "turns": 6,
+      "tool_calls": 4,
+      "tool_output_bytes": 9589,
+      "cost_usd": 0.1173651,
+      "input_tokens": 10,
+      "output_tokens": 1263,
+      "cache_read_input_tokens": 65395,
+      "timed_out": false,
+      "subtype": "success",
+      "tools_used": {
+       "ToolSearch": 1,
+       "search_proxy_http_history": 3
+      }
+     }
+    ],
+    "median": {
+     "wall_s": 22.7,
+     "turns": 6,
+     "tool_calls": 4,
+     "tool_output_bytes": 9589,
+     "cost_usd": 0.117,
+     "input_tokens": 10,
+     "output_tokens": 1263
+    },
+    "correct_runs": 3,
+    "n_runs": 3,
+    "answers": [
+     "Found 3 distinct endpoints repeated across the proxy history (traffic appears to replay in cycles). Each shows a parameter carrying a full URL \u2014 classic SSRF/open-redirect shape:\n\n| Endpoint | Host | Parameter | Example value | Likely issue |\n|---|---|---|---|---|\n| `/fetch` | shop.localhost | `url` | `http://169.254.169.254/latest/meta-data/` | **SSRF** \u2014 directly targets cloud metadata endpoint ",
+     "Found three distinct endpoints whose parameters carry a URL value \u2014 all strong SSRF/open-redirect candidates:\n\n| Endpoint path | Parameter | Observed value | Likely issue |\n|---|---|---|---|\n| `GET /fetch` (shop.localhost:18080) | `url` | `http://169.254.169.254/latest/meta-data/` | **SSRF** \u2014 directly probing the cloud metadata service IP, classic confirmation the fetch is unvalidated/server-side",
+     "Found three distinct endpoints with URL-carrying parameters (repeated across many history entries, same three patterns):\n\n| Endpoint path | Parameter | Notes |\n|---|---|---|\n| `GET /fetch` (shop.localhost) | `url` | Already observed with `http://169.254.169.254/latest/meta-data/` \u2014 classic SSRF to cloud metadata endpoint. High-value finding. |\n| `GET /api/v1/webhooks` (api.localhost) | `callback` "
+    ],
+    "search_tool_used": 2
+   },
+   "A6": {
+    "runs": [
+     {
+      "correct": true,
+      "wall_s": 17.2,
+      "turns": 12,
+      "tool_calls": 11,
+      "tool_output_bytes": 4949,
+      "cost_usd": 0.061807999999999995,
+      "input_tokens": 12,
+      "output_tokens": 1546,
+      "cache_read_input_tokens": 94040,
+      "timed_out": false,
+      "subtype": "success",
+      "tools_used": {
+       "ToolSearch": 1,
+       "get_proxy_http_history_count": 8,
+       "get_proxy_http_history": 2
+      }
+     },
+     {
+      "correct": true,
+      "wall_s": 20.8,
+      "turns": 20,
+      "tool_calls": 19,
+      "tool_output_bytes": 16562,
+      "cost_usd": 0.0963894,
+      "input_tokens": 14,
+      "output_tokens": 2122,
+      "cache_read_input_tokens": 125934,
+      "timed_out": false,
+      "subtype": "success",
+      "tools_used": {
+       "ToolSearch": 1,
+       "get_proxy_http_history_count": 15,
+       "get_proxy_http_history": 3
+      }
+     },
+     {
+      "correct": true,
+      "wall_s": 20.4,
+      "turns": 12,
+      "tool_calls": 11,
+      "tool_output_bytes": 6463,
+      "cost_usd": 0.06744939999999999,
+      "input_tokens": 12,
+      "output_tokens": 1843,
+      "cache_read_input_tokens": 94074,
+      "timed_out": false,
+      "subtype": "success",
+      "tools_used": {
+       "ToolSearch": 1,
+       "get_proxy_http_history_count": 7,
+       "get_proxy_http_history": 3
+      }
+     }
+    ],
+    "median": {
+     "wall_s": 20.4,
+     "turns": 12,
+     "tool_calls": 11,
+     "tool_output_bytes": 6463,
+     "cost_usd": 0.067,
+     "input_tokens": 12,
+     "output_tokens": 1843
+    },
+    "correct_runs": 3,
+    "n_runs": 3,
+    "answers": [
+     "The proxy history has 20,001 requests across 6 hosts. I counted each host with a regex on the request's `Host` header, and the six counts add up to the full total.\n\n| Host | Requests |\n|---|---|\n| shop.localhost:18080 | 9,227 |\n| api.localhost:18080 | 7,875 |\n| static.localhost:18080 | 1,483 |\n| admin.localhost:18080 | 776 |\n| auth.localhost:18080 | 413 |\n| graphql.localhost:18080 | 227 |\n| **Tota",
+     "The proxy history has 20,001 requests across 6 hosts, all on port 18080:\n\n| Host | Requests |\n|---|---|\n| shop.localhost | 9,227 |\n| api.localhost | 7,875 |\n| static.localhost | 1,483 |\n| admin.localhost | 776 |\n| auth.localhost | 413 |\n| graphql.localhost | 227 |\n| **Total** | **20,001** |\n\nI got these by counting history items whose `Host:` header matches each hostname. The six counts add up to ",
+     "The six per-host counts add up to 20001, which matches the total history size. I'm confident that no other hosts are in the history.\n\n| Host | Requests |\n|---|---|\n| shop.localhost | 9227 |\n| api.localhost | 7875 |\n| static.localhost | 1483 |\n| admin.localhost | 776 |\n| auth.localhost | 413 |\n| graphql.localhost | 227 |\n| **Total** | **20001** |\n\nI found the host names by sampling the first, middl"
+    ],
+    "search_tool_used": 0
+   },
+   "A5": {
+    "runs": [
+     {
+      "correct": true,
+      "wall_s": 15.7,
+      "turns": 5,
+      "tool_calls": 3,
+      "tool_output_bytes": 1600,
+      "cost_usd": 0.10379179999999999,
+      "input_tokens": 10,
+      "output_tokens": 602,
+      "cache_read_input_tokens": 67339,
+      "timed_out": false,
+      "subtype": "success",
+      "tools_used": {
+       "ToolSearch": 1,
+       "get_proxy_http_history_filtered": 1,
+       "send_http_request_from_history": 1
+      }
+     },
+     {
+      "correct": true,
+      "wall_s": 17.6,
+      "turns": 6,
+      "tool_calls": 4,
+      "tool_output_bytes": 1874,
+      "cost_usd": 0.10939320000000001,
+      "input_tokens": 12,
+      "output_tokens": 780,
+      "cache_read_input_tokens": 84146,
+      "timed_out": false,
+      "subtype": "success",
+      "tools_used": {
+       "ToolSearch": 1,
+       "search_proxy_http_history": 1,
+       "get_proxy_http_history_by_index": 1,
+       "send_http1_request": 1
+      }
+     },
+     {
+      "correct": true,
+      "wall_s": 15.6,
+      "turns": 5,
+      "tool_calls": 3,
+      "tool_output_bytes": 1600,
+      "cost_usd": 0.10342900000000001,
+      "input_tokens": 10,
+      "output_tokens": 559,
+      "cache_read_input_tokens": 67315,
+      "timed_out": false,
+      "subtype": "success",
+      "tools_used": {
+       "ToolSearch": 1,
+       "get_proxy_http_history_filtered": 1,
+       "send_http_request_from_history": 1
+      }
+     }
+    ],
+    "median": {
+     "wall_s": 15.7,
+     "turns": 5,
+     "tool_calls": 3,
+     "tool_output_bytes": 1600,
+     "cost_usd": 0.104,
+     "input_tokens": 10,
+     "output_tokens": 602
+    },
+    "correct_runs": 3,
+    "n_runs": 3,
+    "answers": [
+     "**401 Unauthorized**\n\nResending the captured `GET /api/v1/users/7777` request with the `Authorization` header removed returns `401 Unauthorized` with body `{\"error\": \"missing bearer token\"}` \u2014 the endpoint correctly rejects unauthenticated requests (no broken-access-control issue here, unlike the original authenticated response which returned a sensitive `note` field with a flag).",
+     "The resent request (without the `Authorization` header) returned **HTTP 401 Unauthorized** (`{\"error\": \"missing bearer token\"}`) \u2014 unlike the original request's 200 OK, so the endpoint does enforce the auth header correctly here.",
+     "The resent request (without the `Authorization` header) returned **HTTP 401 Unauthorized** (`{\"error\": \"missing bearer token\"}`), confirming the endpoint requires authentication and isn't accessible anonymously."
+    ],
+    "search_tool_used": 1
+   },
+   "__total__": {
+    "cost_usd": 1.419,
+    "runs": 18,
+    "correct_runs": 18
+   }
+  }
+ }
+}

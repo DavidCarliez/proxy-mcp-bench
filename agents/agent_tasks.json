@@ -1,0 +1,14 @@
+[
+  {"id": "A1", "prompt": "What is the most recent request in the proxy history? Reply with its HTTP method and full URL.",
+   "checks": ["GET", "health\\?final=1"]},
+  {"id": "A2", "prompt": "How many requests to admin.localhost received a 403 response? Reply with the exact number.",
+   "checks": ["\\b554\\b"]},
+  {"id": "A3", "prompt": "A JavaScript file in the proxy history leaks an AWS access key. Find it and reply with the key and the URL of the file that contains it.",
+   "checks": ["AKIAQ3EXAMPLEKEY7777", "vendor\\.3c9e\\.js"]},
+  {"id": "A4", "prompt": "Find requests whose parameters carry a URL and could be SSRF or open-redirect candidates. Reply with each distinct endpoint path and the parameter name.",
+   "checks": ["/fetch", "/api/v1/webhooks", "/oauth/authorize", "redirect_uri", "callback"]},
+  {"id": "A6", "prompt": "List every host in the proxy history with the exact number of requests sent to each host.",
+   "checks": ["9,?227", "1,?483", "\\b413\\b", "\\b776\\b", "\\b227\\b", "7,?87[5-9]"]},
+  {"id": "A5", "prompt": "Take the captured GET request to /api/v1/users/7777, resend it without its Authorization header, and reply with the HTTP status code of the new response.",
+   "checks": ["\\b401\\b"]}
+]
